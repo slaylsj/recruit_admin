@@ -1,0 +1,195 @@
+
+#root { height: 100%; }
+.ui.inverted.accordion .title:not(.ui) { color: rgba(158, 158, 158, 0.9); }
+
+/* Side Menu */
+.side-menu-btn { position: absolute; background: #333; width: 30px; height: 50px; z-index: 30; padding: 10px 0px 0px 0px; cursor: pointer; }
+.side-menu-btn.show { left: 240px; padding-left:0px !important;}
+.side-menu-btn.hide { left: -10px; padding-left:4px !important;}
+.side-menu-btn .icon { color : #fff }
+.side-menu { overflow-x: hidden; overflow-y: auto; border:none !important; ; border-radius: 0 !important; margin:0px !important; }
+.side-menu .pusher { min-height:98% !important;}
+.sub-side-top { padding: 34px 20px; color:#fff;}
+.sub-side-top p { padding-left: 30px; text-align: left; }
+.left-menu { width : 250px !important; background: #333 !important; border:none !important; box-shadow: none !important; }
+.left-menu .menu { background: transparent !important; }
+
+.menu-list { line-height: 3em}
+.menu-item { width: 250px; }
+.menu-logout { position: absolute !important; bottom: 25px; left: 0; width: 100%; cursor: pointer;}
+.menu-item.link:on { color : rgb(65, 194, 209) !important; background: transparent !important; }  
+.menu-item.link:hover { color : rgb(65, 194, 209) !important; background: transparent !important; }  
+.menu-item.active { background: #1c1c1c !important; } 
+.menu-item.link.active { background: transparent !important; } 
+.menu-item .menu-title {  padding: 10px 15px !important; font-size: 17px !important; text-align: left; color:#7d7d7d !important;}
+.menu-item.link .menu-title.active { color : rgb(65, 194, 209) !important; } 
+.menu-item .menu-title.active { color : rgba(255, 255, 255, 0.9) !important; } 
+.menu-item.link .menu-title:hover { color : rgb(65, 194, 209) !important; background: transparent !important; } 
+.menu-item .menu-title:hover { color : rgba(255, 255, 255, 0.9) !important; background: transparent !important; } 
+.menu-item .menu-title .dropdown { margin:0px !important; }
+.menu-sub-item { font-size: 15px !important; text-align: left !important; margin-left: 40px; padding: 10px 15px !important; color:#7d7d7d !important;}
+.menu-sub-item:on { color : rgb(65, 194, 209) !important;}  
+.menu-sub-item:hover, .menu-sub-item.active { color : rgb(65, 194, 209) !important; background: transparent !important; }  
+
+.ui.accordion.menu .menu-item .menu-title>.dropdown.icon { transform: rotate(0deg) !important; }
+.ui.accordion.menu .menu-item.active .menu-title>.dropdown.icon { transform: rotate(90deg) !important; }
+
+.menu-item.active:after, .menu-item.link.active:after {
+    border-right: 10px solid #fff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: 1px;
+    opacity: 1;
+    top: 15px;
+    transition: opacity 150ms ease-in;
+    z-index: 1000;
+}
+
+
+/* Contents */
+.contents { margin : 50px 20px !important;}
+.content-data { min-height: 900px; }
+.content-pagination { text-align: center; margin-top: 10px; }
+
+/* 지원서 조회 */
+.apply-download { width: 570px !important; }
+.apply-download .download-layer { position: relative; }
+.apply-download .resume, .apply-download .portfolio {
+    width: 250px;
+    height: 120px;
+    border: 2px solid #707070;
+    border-radius: 5px;
+    padding: 23px 50px;
+    font-size: 24px;
+    text-align: center;
+    color: #f7f6f6;
+    line-height: 1.48;
+    background-color: #929292;
+}
+.apply-download .portfolio {
+    position: absolute;
+    left: 275px;
+    top: 0px;
+}
+.apply-download .resume.active {
+    border: 2px solid #2b72bb;
+    background-color: #528eca;
+    cursor: pointer;
+}
+.apply-download .portfolio.active{
+    border: 2px solid #bb2b3e;
+    background-color: #ca5276;
+    cursor: pointer;
+}
+.apply-download .resume.active:hover{
+    background-color: #4587c9;
+}
+.apply-download .portfolio.active:hover{
+    background-color: #c7486e;
+}
+
+/* Write */
+#recruit-write { margin:50px 20px; line-height: 1.7em; }
+#recruit-write .wt-title > div { width: 700px;}
+#recruit-write .select-type { width: 300px;}
+#recruit-write .wt-date, #recruit-write .wt-date > div { width: 200px; }
+#recruit-write .wt-time { margin-left:20px; }
+#recruit-write .wt-time > div { width: 300px; }
+#recruit-write .recruit-label { width: 120px; font-size:1.1em; }
+#recruit-write .wt-date-text { margin-left : 20px; }
+#recruit-write .wt-btn-save { text-align: center; }
+
+/* 본문 영역 */
+.body-contents .controls { margin-top: 30px; margin-bottom: 10px;}
+.body-contents .controls .input { width:300px; margin-right: 10px; }
+.body-contents .controls .selection { display: inline-block; width:100px; margin-right: 10px; }
+.body-contents .controls .button-group { float: right; margin-bottom: 12px; } 
+.ui.delete.button, .ui.delete.button:focus {
+    background-color: #dd4b39;
+    color: #fff;
+    text-shadow: none;
+    background-image: none;
+    box-shadow: 0 0 0 0 rgba(34,36,38,.15) inset;
+}
+.ui.delete.button:hover {
+    background-color: #e0321c;
+    color: #fff;
+    text-shadow: none;
+}
+.ui.delete.button:active {
+    background-color: #c23321;
+    color: #fff;
+    text-shadow: none;
+}
+
+/* 채용공고관리*/
+.rec-title { cursor: pointer; }
+.rec-content { width: 80%; margin-top:30px;}
+.rec-content .content { margin-top:10px;}
+.rec-content .content .pop_cont > img { max-width: 100% }
+.rec-content .content .button-center { text-align: center; }
+.rec-content .content .button-right { text-align: right; padding-right: 20px; margin-bottom: 20px; }
+.rec-content .content .pop_cont {
+    overflow-y: auto;
+    padding: 50px;
+    max-height: 800px;
+    line-height: 22px;
+    font-size: 15px;
+    margin-bottom: 20px;
+} 
+.rec-content .rec-div { position: relative;
+    position: relative;
+    padding: 20px 10px;
+    min-height: 110px;
+    border-top: 2px solid #222;
+    border-bottom: 2px solid #222;
+}
+.rec-content .rec-div .title {
+    margin-bottom: 15px;
+    color: #222;
+    line-height: 30px;
+    font-size: 28px;
+}
+.rec-content .rec-div .date {
+    color: #888;
+    line-height: 16px;
+    font-size: 14px;
+}
+.rec-content .rec-div .dday {
+    padding-left: 16px;
+    color: #f1648a;
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.pop_bd .pop_cont {
+    overflow-y: auto;
+    padding: 50px 10px;
+    max-height: 800px;
+    line-height: 22px;
+    font-size: 15px;
+}
+
+/* Q&A */
+.qna-list-item { font-family: Lato,Helvetica Neue,Arial,Helvetica,sans-serif !important; }
+.qna-textarea { height: 150px; }
+
+
+/* 공고상세 미리보기 팝업 */
+.pop_wrap { display: block; position: fixed !important; top: 0 !important; left: 0; overflow-y: auto; width: 100%; min-height: 100%; font-family: "Noto Sans KR", sans-serif; background: rgba(0,0,0,0.65); z-index: 10000;}
+.pop_wrap#recruit_view { display: block; }
+.pop_wrap * { box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; }
+.popup { position: absolute; top: 50%; left: 50%; padding: 0 40px; width: 720px; background: #fff; transform: translate( -50%, -50%); -webkit-transform: translate( -50% -50%); -moz-transform: translate( -50% -50%); -ms-transform: translate( -50% -50%);}
+.pop_hd { position: relative; padding: 54px 50px 10px 0; min-height: 143px; border-bottom: 2px solid #222; }
+.pop_hd .title { margin-bottom: 15px; color: #222; line-height: 30px; font-size: 28px; }
+.pop_hd .date { color: #888; line-height: 16px; font-size: 14px; }
+.pop_hd .dday { padding-left: 16px; color: #f1648a; line-height: 16px; font-size: 14px; font-weight: 500; }
+.pop_hd .btn_close { position: absolute; top: 51px; right: 0; cursor: pointer; }
+.pop_bd .pop_cont { overflow-y: auto; padding: 50px 10px; max-height: 800px; line-height: 22px; font-size: 15px; }
+.pop_bd .pop_cont > img { max-width: 100%; }
+.pop_bd .title { margin-bottom: 25px; color: #000; line-height: 22px; font-size: 20px; }
+.popup .btn_area { padding-top: 40px; min-height: 154px; border-top: 2px solid #222; text-align: center; }
+.popup .btn_ty1 { display: inline-block; min-width: 280px; height: 62px; color: #fff; font-size: 20px; font-weight: bold; background: rgb(65, 194, 209); vertical-align: top; cursor: pointer;}

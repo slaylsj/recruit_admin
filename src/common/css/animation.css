@@ -1,0 +1,23 @@
+/*  Side menu buttion */
+.side-menu-btn.show.on {
+    animation-name: side-menu-btn-slide-show; 
+    animation-timing-function: ease;
+    animation-duration: .5s; 
+    animation-fill-mode: both;
+
+}
+@keyframes side-menu-btn-slide-show {
+    0% {left: -10px;}
+    100% {left: 240px;}
+}
+
+.side-menu-btn.hide.on {
+    animation-name: side-menu-btn-slide-hide; 
+    animation-timing-function: ease;
+    animation-duration: .5s; 
+    animation-fill-mode: both;
+}
+@keyframes side-menu-btn-slide-hide {
+    0% {left: 240px;}
+    100% {left: -10px;}
+}
