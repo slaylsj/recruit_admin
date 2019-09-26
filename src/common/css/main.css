@@ -94,13 +94,15 @@
 /* Write */
 #recruit-write { margin:50px 20px; line-height: 1.7em; }
 #recruit-write .wt-title > div { width: 700px;}
-#recruit-write .select-type { width: 300px;}
+#recruit-write .select-type { width: 250px;}
 #recruit-write .wt-date, #recruit-write .wt-date > div { width: 200px; }
 #recruit-write .wt-time { margin-left:20px; }
 #recruit-write .wt-time > div { width: 300px; }
 #recruit-write .recruit-label { width: 120px; font-size:1.1em; }
+#recruit-write .recruit-label-2 { width: 50px; font-size:1.1em; margin-left: 50px; }
 #recruit-write .wt-date-text { margin-left : 20px; }
 #recruit-write .wt-btn-save { text-align: center; }
+#recruit-write .wt-group > div { width: 200px;}
 
 /* 본문 영역 */
 .body-contents .controls { margin-top: 30px; margin-bottom: 10px;}

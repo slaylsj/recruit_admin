@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import Promise from 'promise-polyfill';
+import 'polyfill-array-includes';
 import { Provider } from 'mobx-react';
 import RootStore from './stores';
 

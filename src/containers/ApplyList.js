@@ -143,26 +143,12 @@ class ApplyList extends React.Component {
     // 파일 다운로드
     hadnleFileDownload = (filePath) => {
         const fileName = new String(filePath).substring(filePath.lastIndexOf("/")+1);
-        let xhr = new XMLHttpRequest();
-        try {
-            xhr.open('GET', filePath);
-            xhr.onload = () => {
-                // console.log("xhr.response : ",xhr.response);
-                const blob = new Blob([xhr.response], {type: xhr.response.type});
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', fileName);
-                document.body.appendChild(link);
-                link.click();
-                link.remove();
-                window.URL.revokeObjectURL(url);
-            };
-            xhr.responseType = 'blob';
-            xhr.send();
-        } catch (error) {
-            console.log(error);
-        }
+        const url = '/' + encodeURI(filePath);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', fileName);
+        document.body.appendChild(link);
+        link.click();
     };
 
     // 페이지 이벤트
@@ -177,6 +163,7 @@ class ApplyList extends React.Component {
             { key: 'gubun1', text: '전체', value: 'all' },
             { key: 'gubun2', text: '바나플', value: 'banaple' },
             { key: 'gubun3', text: '바나플F&B', value: 'banaplefnb' },
+            { key: 'gubun4', text: '바나프레소', value: 'banapresso' },
         ]
 
         return (

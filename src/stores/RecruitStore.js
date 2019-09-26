@@ -5,9 +5,98 @@ export default class RecruitStore {
     @observable error = null
     @observable isFetching = false
     @observable recruitList = []
-
+    @observable deptList = []
+    @observable companyList = []
+    @observable groupList = []
+    @observable jobList = []
+    
     constructor(root) {
         this.root = root;
+    }
+
+    @action
+    getCheckDept = (value, type) => {
+        let checkData = false;
+        if(type === 'G'){ // group
+            this.groupList.forEach(data => {
+                if(data.value === value) checkData = true;
+            });
+        }else if(type === 'J'){ // job
+            this.jobList.forEach(data => {
+                if(data.value === value) checkData = true;
+            });
+        }
+        return checkData
+    }
+
+    // 부서정보
+    @action
+    setDeptGroupList = (company) => {
+        if(company === 'banaple'){
+            this.companyList = this.deptList.filter((data) => { return '바나플' === data.sCompany});
+        }else if(company === 'banaplefnb'){
+            this.companyList = this.deptList.filter((data) => { return 'F&B' === data.sCompany});
+        }else if(company === 'banapresso'){
+            this.companyList = this.deptList.filter((data) => { return '바나프레소' === data.sCompany});
+        }
+
+        const groupList = this.companyList.reduce((unique, item) => unique.includes(item.sGroup) ? unique : [...unique, item.sGroup], []);
+        let groupOptList = [];
+        groupList.forEach((value, idx) => { 
+            groupOptList.push({ key: 'group'+idx, text: value, value: value });
+        })
+        // console.log("groupOptList", groupOptList);
+        this.groupList = groupOptList;
+    }
+
+    // 직무정보
+    @action
+    setDeptJobList = (group) => {
+        const jobList = this.companyList.filter((data) => { return group === data.sGroup});
+        let jobOptList = [];
+        jobList.forEach((data, idx) => { 
+            jobOptList.push({ key: 'job'+idx, text: data.sJob, value: data.sJob });
+        })
+        if(group !== '직접입력') jobOptList.push({ key: 'job'+jobList.length, text: '직접입력', value: '직접입력' });
+        // console.log("jobOptList", jobOptList);
+        this.jobList = jobOptList;
+    }
+
+    @action
+    selectDepartment = (callback) => {
+        this.isFetching = true
+        this.error = null
+        try{
+            let axiosConfig = {
+                headers : {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    'Accept': "application/json; charset=UTF-8"
+                }   
+            }
+            
+            let data = { 
+                ws: 'fprocess',
+                query: '0VP1R6NUMINPGQC8XYXT',	
+                params: { nFCode: "@nFCode"}
+            } // web_b_a_insert_banaple_department
+            data = JSON.stringify(data);
+            Axios.post("/query", data, axiosConfig, (result) => {
+                const columns = result.data.columns.map(d => { return d.name });
+                this.deptList = result.data.rows.map((rowObj) => {
+                    let obj = {};
+                    columns.forEach((element, idx) => { obj[element] = rowObj[idx] });
+                    return obj;
+                });
+                callback( this.deptList );
+            });
+            this.isFetching = false
+            
+        }catch(e){
+            //this.showWarning();
+            console.log('[ERROR]RecruitStore.selectRecruit', e);
+            this.error = e
+            this.isFetching = false
+        }
     }
     
     @action

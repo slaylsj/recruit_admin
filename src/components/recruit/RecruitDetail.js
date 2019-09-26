@@ -2,7 +2,7 @@ import React from 'react';
 import { Header, Button } from 'semantic-ui-react';
 
 const RecruitDetail = (props) => {
-    const { sTitle, sContents, dtEndView, nFinishDay} = props.data;
+    const { sTitle, sContents, contents, dtEndView, nFinishDay} = props.data;
     const { handleGoList, handleClickModify, handleClickDelete} = props;
     const finishDay = (day) => {
         let returnVal = "";
@@ -20,7 +20,7 @@ const RecruitDetail = (props) => {
 			</div>
 
             <div className="content">
-				<div className="pop_cont board_view" dangerouslySetInnerHTML={ {__html: sContents} }>
+				<div className="pop_cont board_view" dangerouslySetInnerHTML={ {__html: contents} }>
 				</div>
                 <div className="button-group button-right">
                     <Button content='수정' color="teal" onClick={handleClickModify} />

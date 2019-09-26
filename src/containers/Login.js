@@ -162,6 +162,9 @@ class Login extends React.Component{
                                 }
                             </Segment>
                         </Form>
+                        <Message info>
+                            <p>※ IE에서는 정삭적으로 동작 하지 않을 수 있습니다.<br/> Chrome 브라우저를 이용해 주세요.</p>
+                        </Message>
                     </Grid.Column>
                 </Grid>
             </div>

@@ -5,6 +5,7 @@ import RecruitItemList from '../components/recruit/RecruitItmeList';
 import RecruitDetail from '../components/recruit/RecruitDetail';
 import AlertModal from '../components/common/AlertModal';
 import history from '../history/History';
+import Utils from '../utils/Utils';
 
 @inject("recruitStore")
 @observer
@@ -132,6 +133,10 @@ class RecruitMgmt extends React.Component {
         const { recruitList } = this.props.recruitStore;
         const targetIndex = recruitList.map( data => { return data.nRecruitID }).indexOf(recruitID);
         let selectData = Object.assign({}, recruitList[targetIndex]);
+
+        // Contetns 파일 내용 셋팅.
+        selectData["contents"] = Utils.readFileContentHtml(selectData.sContents);
+
         this.setState({ ...this.state, listCheckValue : recruitID, detailView : true, detailData : selectData });
     }
 
@@ -154,6 +159,7 @@ class RecruitMgmt extends React.Component {
             { key: 'gubun1', text: '전체', value: 'all' },
             { key: 'gubun2', text: '바나플', value: 'banaple' },
             { key: 'gubun3', text: '바나플F&B', value: 'banaplefnb' },
+            { key: 'gubun4', text: '바나프레소', value: 'banapresso' },
         ]
 
         return (
