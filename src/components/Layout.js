@@ -30,6 +30,14 @@ class Layout extends React.Component {
             };
         }
         this.intervalPing = setInterval(this.sessionPing, 300000); // sesseion유지를 위해 5분에 한번씩 ping 
+
+        window.addEventListener('resize', this.handleAnimationResize);
+    }
+
+    // Resize Event
+    handleAnimationResize = () => {
+        const contentWidth = this.state.visible ?  window.innerWidth - 300+"px" : window.innerWidth - 50+"px";
+        this.setState({ ...this.state, sideMenuAnimation: 'on', contentsWidth: contentWidth})
     }
 
     componentWillUnmount(){

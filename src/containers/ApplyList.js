@@ -107,7 +107,7 @@ class ApplyList extends React.Component {
             if(data.return === 0){
                 this.setState({ ...this.state, 
                     listCheckValue : 0,
-                    alertModal : { open : true, message : "해당 지원서가 삭제 되었습니다." }
+                    // alertModal : { open : true, message : "해당 지원서가 삭제 되었습니다." }
                 });
                 this.handleSearch(1);
             }else{

@@ -113,7 +113,7 @@ class RecruitMgmt extends React.Component {
                 this.setState({ ...this.state, 
                     listCheckValue : 0,
                     detailView : false, detailData : {},
-                    alertModal : { open : true, message : "해당공고가 삭제 되었습니다." }
+                    // alertModal : { open : true, message : "해당공고가 삭제 되었습니다." }
                 });
                 this.handleSearch();
             }else{

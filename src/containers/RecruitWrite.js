@@ -63,6 +63,9 @@ class RecruitWrite extends React.Component {
         }else if(name === 'group'){
             this.setDeptJobList(value);
             this.setState({...this.state, [name]: value, job : '', txt_job : ''});
+        }else if(name === 'recruitType'){
+            if( value === 1) this.setState({...this.state, [name]: value, endDate : '2029-12-31'});
+            else this.setState({...this.state, [name]: value, endDate : ''});
         }else if(this.state.hasOwnProperty(name)) {
             this.setState({...this.state, [name]: value });
         }
@@ -89,7 +92,7 @@ class RecruitWrite extends React.Component {
         let validationCheck = false, msg = '';
         if(title === ''){
             validationCheck = true; msg = '공고명을 입력 하시기 바랍니다.';
-        }else if(endDate === ''){
+        }else if(recruitType === 0 && endDate === ''){
             validationCheck = true; msg = '마감일을 입력 하시기 바랍니다.';
         }else if(group === ''){
             validationCheck = true; msg = '부서를 선택 하시기 바랍니다.';
@@ -238,24 +241,29 @@ class RecruitWrite extends React.Component {
                         <Form.Group inline>
                             <label className="recruit-label">공고방식</label>
                             <Form.Select className="select-type" required={true} fluid options={options} placeholder='선택' name="recruitType" value={recruitType} defaultValue={recruitType} onChange={this.handleChange}/>
+                            {recruitType === 0 ? 
                             <label className="recruit-label-2">마감일</label>
-                            {/* <DateInput className="wt-date" required={true}  fluid 
-                                name="endDate"
-                                dateFormat="YYYY-MM-DD"
-                                placeholder="공고마감일"
-                                value={endDate}
-                                closable={true}
-                                closeOnMouseLeave={false}
-                                iconPosition="right"
-                                popupPosition="bottom left"
-                                onChange={this.handleChange} 
-                            /> */}
+                            // {/* <DateInput className="wt-date" required={true}  fluid 
+                            //     name="endDate"
+                            //     dateFormat="YYYY-MM-DD"
+                            //     placeholder="공고마감일"
+                            //     value={endDate}
+                            //     closable={true}
+                            //     closeOnMouseLeave={false}
+                            //     iconPosition="right"
+                            //     popupPosition="bottom left"
+                            //     onChange={this.handleChange} 
+                            // /> */}
+                            : null }
+                            {recruitType === 0 ? 
                             <DatePicker
                                 selected={endDate}
                                 onChange={this.handleDateChange}
                                 dateFormat="yyyy-MM-dd"
-                            />
+                            /> : null }
+                            {recruitType === 0 ? 
                             <label className="wt-date-text">마감시간은 해당 마감일 23:59분까지</label>
+                            : null }
                         </Form.Group>
                         
                         <Form.Group inline>

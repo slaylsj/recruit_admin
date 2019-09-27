@@ -3,11 +3,12 @@ import { Table, Checkbox } from 'semantic-ui-react';
 
 const RecruitItem = (props) => {
     const { idx, data, listCheckValue, handleClickCheckBox, handleClickDetail } = props;
-    const finishDay = (day) => {
+    const finishDay = (day, nRecruitType) => {
         let returnVal = "";
         if(day < 0) returnVal = "접수마감";
         else if(day === 0) returnVal = "D-day";
         else returnVal = "D-" + day;
+        if(nRecruitType === 1) returnVal = "채용시까지";
         return returnVal;
     }
     const companyNm = (company) => {
@@ -25,7 +26,7 @@ const RecruitItem = (props) => {
             <Table.Cell textAlign="center">{companyNm(data.sCompany)}</Table.Cell>
             <Table.Cell textAlign="center">{data.nRecruitType === 0 ? "정시" : "상시"}</Table.Cell>
             <Table.Cell className="rec-title" onClick={() => handleClickDetail(data.nRecruitID)}><b>{data.sTitle}</b><br/> ~ {data.dtEndView}</Table.Cell>
-            <Table.Cell textAlign="center">{finishDay(data.nFinishDay)}</Table.Cell>
+            <Table.Cell textAlign="center">{finishDay(data.nFinishDay, data.nRecruitType)}</Table.Cell>
         </Table.Row>
     );
 }
