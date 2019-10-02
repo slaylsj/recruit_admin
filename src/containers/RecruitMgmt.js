@@ -161,7 +161,7 @@ class RecruitMgmt extends React.Component {
             { key: 'gubun3', text: '바나플F&B', value: 'banaplefnb' },
             { key: 'gubun4', text: '바나프레소', value: 'banapresso' },
         ]
-
+        
         return (
             <div className="body-contents">
                 <Header as='h2'>채용 공고 관리</Header>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Header, Button } from 'semantic-ui-react';
 
 const RecruitDetail = (props) => {
-    const { sTitle, sContents, contents, dtEndView, nFinishDay} = props.data;
+    const { sTitle, sContents, contents, dtEndView, nFinishDay, nRecruitType} = props.data;
     const { handleGoList, handleClickModify, handleClickDelete} = props;
     const finishDay = (day) => {
         let returnVal = "";
@@ -15,8 +15,8 @@ const RecruitDetail = (props) => {
         <div className="rec-content">
             <div className="rec-div">
 				<h2 className="title">{sTitle}</h2>
-				<span className="date"> ~ {dtEndView}</span>
-				<span className="dday">{finishDay(nFinishDay)}</span>
+				<span className="date"> ~ {nRecruitType === 1 ? '' : dtEndView}</span>
+				<span className="dday">{nRecruitType === 1 ? '상시채용' : finishDay(nFinishDay)}</span>
 			</div>
 
             <div className="content">

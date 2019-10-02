@@ -1,8 +1,8 @@
 import React from 'react';
-import { Table, Checkbox } from 'semantic-ui-react';
+import { Table, Checkbox, Header, Image } from 'semantic-ui-react';
 
 const ApplyItem = (props) => {
-    const { idx, data, listCheckValue, handleClickCheckBox, handleClickDetail } = props;
+    const { idx, data, listCheckValue, handleClickCheckBox, handleClickDetail, handleProfileModalOpen } = props;
     const finishDay = (day) => {
         let returnVal = "";
         if(day < 0) returnVal = "접수마감";
@@ -26,8 +26,17 @@ const ApplyItem = (props) => {
                 <Table.Cell textAlign="center">{idx}</Table.Cell>
                 <Table.Cell textAlign="center">{companyNm(data.sCompany)}</Table.Cell>
                 <Table.Cell >{data.sTitle}</Table.Cell>
-                <Table.Cell textAlign="center">{data.sName}</Table.Cell>
+                {/* <Table.Cell textAlign="center">{data.sName} </Table.Cell> */}
+                <Table.Cell textAlign="center">
+                <Header as='h4' image>
+                    {data.sProfileImageUrl !== '' ? <Image className="img-profile" src={`/${data.sProfileImageUrl}`} rounded size='mini' onClick={() => handleProfileModalOpen(data.nSubmitID)}/> : null}
+                    <Header.Content>
+                        {data.sName} <Header.Subheader>{data.sBirthDayYear}{data.sBirthDayYear.length > 0? '년' : ''}</Header.Subheader>
+                    </Header.Content>
+                </Header>
+                </Table.Cell>
                 <Table.Cell textAlign="center">{data.sPhone}</Table.Cell>
+                {/* <Table.Cell textAlign="center">{data.sBirthDayYear}{data.sBirthDayYear.length > 0? '년' : ''}</Table.Cell> */}
                 <Table.Cell textAlign="center">{data.sResumeUrl !== '' ? 'O' : 'X'} / {data.sPortfolioUrl !== '' ? 'O' : 'X'}</Table.Cell>
                 <Table.Cell textAlign="center">{data.dtSubmitDate}</Table.Cell>
                 <Table.Cell >{data.sMemo}</Table.Cell>

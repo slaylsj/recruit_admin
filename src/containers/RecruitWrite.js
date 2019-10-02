@@ -29,6 +29,7 @@ class RecruitWrite extends React.Component {
             endDate: '',
             contents : '',
             chkResume : false,
+            chkProfileImage : false,
             chkPortfolio : false,
             chkPortfolioChoise : false,
             oEditors : [],
@@ -79,13 +80,14 @@ class RecruitWrite extends React.Component {
     }
 
     handleDateChange = (date) => {
-        this.setState({...this.state, endDate: date });
+        const timezoneDate = new Date(date.getTime() + 9*60*60*1000);
+        this.setState({...this.state, endDate: timezoneDate});
     }
 
     handleSave = (e) => {
         e.preventDefault();
 
-        const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkPortfolio, chkPortfolioChoise, endDate } = this.state;
+        const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, endDate } = this.state;
         let param_group = group, param_job = job;
 
         // 입력 값 체크.
@@ -140,6 +142,7 @@ class RecruitWrite extends React.Component {
                 // sContents : document.getElementById("ir1").value,
                 sContents : content_url,
                 bResume : chkResume,
+                bProfileImage : chkProfileImage,
                 bPortfolio : chkPortfolio,
                 bPortfolioChoise : chkPortfolioChoise,
                 dtEnd : endDate,
@@ -190,7 +193,7 @@ class RecruitWrite extends React.Component {
     }
 
     render() {
-        const { company, group, txt_group, job, txt_job, title, contents, chkResume, chkPortfolio, chkPortfolioChoise, recruitType, endDate, alertModal, oEditors, previewModal, editorID } = this.state
+        const { company, group, txt_group, job, txt_job, title, contents, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, recruitType, endDate, alertModal, oEditors, previewModal, editorID } = this.state
         const { groupList, jobList } = this.props.recruitStore;
 
         const previewData = { title: title,
@@ -281,6 +284,12 @@ class RecruitWrite extends React.Component {
                                 label='이력서'
                                 name='chkResume'
                                 checked={chkResume}
+                                onChange={this.handleCheckboxChange}
+                            />
+                            <Form.Checkbox
+                                label='본인사진'
+                                name='chkProfileImage'
+                                checked={chkProfileImage}
                                 onChange={this.handleCheckboxChange}
                             />
                             <Form.Checkbox

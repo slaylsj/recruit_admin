@@ -28,6 +28,7 @@ class RecruitModify extends React.Component {
             endDate: '',
             contents : '',
             chkResume : false,
+            chkProfileImage : false,
             chkPortfolio : false,
             chkPortfolioChoise : false,
             editorEnable : false,
@@ -81,6 +82,7 @@ class RecruitModify extends React.Component {
                         // contents : data.sContents,
                         contents : contents,
                         chkResume : (data.bResume === "1" ? true : false),
+                        chkProfileImage : (data.bProfileImage === "1" ? true : false),
                         chkPortfolio : (data.bPortfolio === "1" ? true : false),
                         chkPortfolioChoise : (data.bPortfolioChoise === "1" ? true : false),
                         editorEnable : true
@@ -127,7 +129,7 @@ class RecruitModify extends React.Component {
 
         this.state.oEditors.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
 
-        const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkPortfolio, chkPortfolioChoise, endDate } = this.state;
+        const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, endDate } = this.state;
         let param_group = group, param_job = job;
         
         // 입력 값 체크.
@@ -180,6 +182,7 @@ class RecruitModify extends React.Component {
                 // sContents : document.getElementById("ir2").value,
                 sContents : content_url,
                 bResume : chkResume,
+                bProfileImage : chkProfileImage,
                 bPortfolio : chkPortfolio,
                 bPortfolioChoise : chkPortfolioChoise,
                 dtEnd : endDate,
@@ -230,7 +233,7 @@ class RecruitModify extends React.Component {
     }
 
     render() {
-        const { company,  group, txt_group, job, txt_job, title, contents, chkResume, chkPortfolio, chkPortfolioChoise, recruitType, endDate, editorEnable, alertModal, oEditors, previewModal, editorID } = this.state
+        const { company,  group, txt_group, job, txt_job, title, contents, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, recruitType, endDate, editorEnable, alertModal, oEditors, previewModal, editorID } = this.state
         const { groupList, jobList } = this.props.recruitStore;
         const previewData = { title: title,
             recruitType : recruitType,
@@ -322,6 +325,12 @@ class RecruitModify extends React.Component {
                                 label='이력서'
                                 name='chkResume'
                                 checked={chkResume}
+                                onChange={this.handleCheckboxChange}
+                            />
+                            <Form.Checkbox
+                                label='본인사진'
+                                name='chkProfileImage'
+                                checked={chkProfileImage}
                                 onChange={this.handleCheckboxChange}
                             />
                             <Form.Checkbox

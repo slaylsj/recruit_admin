@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import ApplyItemList from '../components/recruitApply/ApplyItemList'
 import AlertModal from '../components/common/AlertModal';
 import ApplyDownload from '../components/recruitApply/ApplyDownload';
+import ApplyProfileImage from '../components/recruitApply/ApplyProfileImage';
 import PaginationTemplet from '../components/common/PaginationTemplet';
 
 @inject("applyStore")
@@ -19,6 +20,10 @@ class ApplyList extends React.Component {
             },
             pageInfo : {
                 pageRow : 10
+            },
+            profileImageModal : {
+                open : false,
+                profileImageUrl : "", 
             },
             downloadModal : {
                 open : false,
@@ -121,6 +126,21 @@ class ApplyList extends React.Component {
     // 삭제 취소
     handleDeleteCancel = () => this.setState({...this.state, confirmModal : { ...this.state.confirmModal, open: false }})
 
+    // 프로필사진 모달 열기
+    handleProfileModalOpen = (submitID) => {
+        const { applyList } = this.props.applyStore;
+        // 선택된 데이터 정보 추출.
+        const targetQnaIndex = applyList.map( data => { return data.nSubmitID }).indexOf(submitID);
+        let selectData = Object.assign({}, applyList[targetQnaIndex]);
+        this.setState({ ...this.state, profileImageModal : { open: true, profileImageUrl : selectData.sProfileImageUrl }});
+    
+    }
+
+    // 프로필사진 모달 닫기
+    handleProfileModalClose = () => {
+        this.setState({ ...this.state, profileImageModal : { open: false, profileImageUrl : '' }});
+    }
+
     // 다운로드 모달 열기
     handleDownModalOpen = () => {
         const submitID = this.state.listCheckValue;
@@ -137,7 +157,7 @@ class ApplyList extends React.Component {
 
     // 다운로드 모달 닫기
     handleDownModalClose = () => {
-        this.setState({ ...this.state, downloadModal : { open: false, addFlag : false }});
+        this.setState({ ...this.state, downloadModal : { open: false, resumeUrl : '', portfolioUrl : '' }});
     }
 
     // 파일 다운로드
@@ -157,7 +177,7 @@ class ApplyList extends React.Component {
     }
 
     render(){
-        const { listCheckValue, downloadModal, confirmModal, alertModal, pageInfo } = this.state;
+        const { listCheckValue, profileImageModal, downloadModal, confirmModal, alertModal, pageInfo } = this.state;
         const { applyList, totalCnt, activePage } = this.props.applyStore;
         const options = [
             { key: 'gubun1', text: '전체', value: 'all' },
@@ -185,22 +205,24 @@ class ApplyList extends React.Component {
                                 <Table.HeaderCell style={{ width:"50px" }}></Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"60px", textAlign:"center" }} >번호</Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"120px", textAlign:"center" }} >구분</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"500px", textAlign:"center" }} >모집 공고</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >이름</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"400px", textAlign:"center" }} >모집 공고</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"350px", textAlign:"center" }} >지원자</Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"250px", textAlign:"center" }} >연락처</Table.HeaderCell>
+                                {/* <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >출생년도</Table.HeaderCell> */}
                                 <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >이력서 / 포폴</Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >지원일자</Table.HeaderCell>
                                 <Table.HeaderCell style={{ textAlign:"center" }} >메모</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
-                        <ApplyItemList applyList={applyList} totalCnt={totalCnt} activePage={activePage} listCheckValue={listCheckValue} handleClickCheckBox={this.handleClickCheckBox} />
+                        <ApplyItemList applyList={applyList} totalCnt={totalCnt} activePage={activePage} listCheckValue={listCheckValue} handleClickCheckBox={this.handleClickCheckBox} handleProfileModalOpen={this.handleProfileModalOpen} />
                     </Table>
                 </div>
                 <div className="content-pagination">
                     <PaginationTemplet totalCnt={totalCnt} pageInfo={pageInfo} handlePaginationChange={this.handlePaginationChange} />
                 </div>
 
+                <ApplyProfileImage data={profileImageModal} handleProfileModalClose={this.handleProfileModalClose} />
                 <ApplyDownload data={downloadModal} handleDownModalClose={this.handleDownModalClose} hadnleFileDownload={this.hadnleFileDownload} />
                 <Confirm open={confirmModal.open} size="tiny" content={confirmModal.message} cancelButton="취소" confirmButton="확인" onCancel={this.handleDeleteCancel} onConfirm={this.handleDeleteConfirm} />
                 <AlertModal open={alertModal.open} message={alertModal.message}  size="mini" closeModal={this.handleCloseAlertModal} />
