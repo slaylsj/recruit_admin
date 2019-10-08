@@ -4,7 +4,7 @@ import { Table } from 'semantic-ui-react';
 
 const ApplyItemList = (props) => {
     const { applyList, totalCnt, activePage, listCheckValue, handleClickCheckBox, handleProfileModalOpen } = props;
-    const totalSize = applyList.length;
+    // const totalSize = applyList.length;
     return(
         <Table.Body>
             { 

@@ -97,7 +97,7 @@
 
 /* Write */
 #recruit-write { margin:50px 20px; line-height: 1.7em; }
-#recruit-write .wt-title > div { width: 700px;}
+#recruit-write .wt-title > div { width: 870px;}
 #recruit-write .select-type { width: 250px;}
 #recruit-write .wt-date, #recruit-write .wt-date > div { width: 200px; }
 #recruit-write .wt-time { margin-left:20px; }
@@ -109,6 +109,7 @@
 #recruit-write .wt-group > div { width: 200px;}
 
 /* 본문 영역 */
+.body-contents a { cursor: pointer; }
 .body-contents .controls { margin-top: 30px; margin-bottom: 10px;}
 .body-contents .controls .input { width:300px; margin-right: 10px; }
 .body-contents .controls .selection { display: inline-block; width:100px; margin-right: 10px; }
@@ -199,3 +200,495 @@
 .pop_bd .title { margin-bottom: 25px; color: #000; line-height: 22px; font-size: 20px; }
 .popup .btn_area { padding-top: 40px; min-height: 154px; border-top: 2px solid #222; text-align: center; }
 .popup .btn_ty1 { display: inline-block; min-width: 280px; height: 62px; color: #fff; font-size: 20px; font-weight: bold; background: rgb(65, 194, 209); vertical-align: top; cursor: pointer;}
+
+
+/* 웹설문 만들기 */
+/* 명접 질문 만들기 */
+.interview-history { width: 760px !important; }
+.interview-history .history-list { overflow-y: scroll; height: 650px; max-height: 650px;}
+.interview-history .history-list .content {line-height: 17px !important;  padding: 3px !important;}
+.btn_option { position: absolute; left: 30px; top: 90px; }
+.btn_option .add_option { border: 1px solid #c9c9c9; border-radius: 3px; padding: 3px 5px; background: #f6f6f6; color: #757575; cursor: pointer; }
+.btn-history { padding: 2px 10px; border: 1px solid #ccc; font-size: 14px; cursor: pointer; background: #ecf0f1; display: block; margin-top: 5px; width: 140px; text-align: center; }
+.modal-history { height: 600px; overflow-y: scroll; }
+.historyList { display: grid; padding: 5px; border-bottom: 1px solid #cecbcb; cursor: pointer;}
+.historyList:hover { background: #c5e2ff;}
+.btn-question { position: absolute; top: 120px; right: 20px; width: 119px; line-height: 20px; border: 1px solid #ccc; padding: 5px 5px; text-align: center;}
+  .interview_write_container .form-group > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 34px;
+  }
+  .wt-textarea { width: 870px !important; min-height: 80px !important; resize:vertical !important; }
+  .interview_write_container > textarea {
+    padding: 6px 12px !important;
+    width: 100% !important;
+    height: 80px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  }
+  .interview_write_container ul {
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .question_list > li {
+    position: relative;
+    margin-top: 20px;
+    padding: 20px 180px 30px 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  .question_list > li:first-child {
+    margin-top: 0;
+  }
+  .question_list > li .num {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .question_list > li .txt_question {
+    margin-bottom: 10px !important;
+    width: 100% !important;
+    min-height: 50px !important;
+    height: 50px;
+    resize: vertical !important;
+  }
+  .item_sel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid #ccc;
+  }
+  .item_sel li {
+    padding: 0 15px;
+    border-top: 1px solid #ccc;
+    line-height: 30px;
+    font-size: 14px;
+  }
+  .item_sel li:first-child {
+    border-top: 0 none;
+  }
+  .item_sel li.on {
+    background: #e9f0fe;
+  }
+  
+  .item_type > div {
+    display: none;
+  }
+  .item_type > div.on {
+    display: block;
+  }
+  .item_list li {
+    position: relative;
+    padding: 5px 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  .item_list li button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border: 0 none;
+    background: none;
+  }
+  .item_list li label {
+    margin: 0;
+  }
+  .item_list li input[type="text"] {
+    padding: 0 10px !important;
+    width: 85% !important;
+    border: 0 none !important;
+    outline: 0 none !important;
+  }
+  .item_list input[type="checkbox"],  .item_list input[type="radio"]{
+    margin : 4px 0 !important;
+    line-height: normal !important;
+  }
+  
+  .question_list > li:first-child .btn_group .btn_next {
+    display: block;
+    margin-top: 0;
+  }
+  .question_list > li:first-child .btn_group .btn_prev {
+    display: none;
+  }
+  .question_list > li:last-child .btn_group .btn_next {
+    display: none;
+  }
+  .question_list > li:last-child .btn_group .btn_prev {
+    display: block;
+  }
+  .question_list > li:last-child .btn_group .btn_add {
+    font-family: inherit;
+    display: block;
+  }
+  .question_list > li:last-child .btn_group .btn_del {
+    display: none;
+  }
+  
+  .btn_group > * {
+    position: absolute;
+    left: -30px;
+    width: 30px;
+  }
+  .btn_group button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #bbb;
+  }
+  .btn_group .btn_add {
+    display: none;
+    top: 0;
+    background: #5cb85c;
+    color: #fff;
+    line-height: 28px;
+    font-size: 22px;
+  }
+  .btn_group .btn_del {
+    display: block;
+    top: 0;
+    background: #d9534f;
+    color: #fff;
+    line-height: 28px;
+    font-size: 22px;
+  }
+  .btn_group .prev_next {
+    bottom: 0;
+    width: 30px;
+  }
+  .btn_group .btn_next {
+    bottom: 0;
+    margin-top: -1px;
+    width: 30px;
+  }
+  .modal-dialog .interview_preview {
+    margin-bottom: 0;
+  }
+  
+  /* 2019-08-13 : 면접사전설문 만들기 가로 사이즈 수정 */
+  .interview_write_container .col-sm-6 {
+    width: 870px;
+  }
+  @media (max-width: 1300px) {
+    .interview_write_container {
+      min-width: 600px;
+    }
+    .interview_write_container .col-sm-6 {
+      width: 100%;
+    }
+  }
+  /* //2019-08-13 : 면접사전설문 만들기 가로 사이즈 수정 */
+
+/* 웹설문미리보기 */
+.interview_preview {
+    position: relative;
+    margin-bottom: 30px;
+    width: 375px !important;
+    min-height: 667px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    background: #e7e7e7;
+    left: 80px;
+  }
+  .interview_preview #m_header {
+    position: absolute;
+  }
+  #m_header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0 18px;
+    width: 100%;
+    height: 55px;
+    border-bottom: 2px solid #ddd;
+    background: #fff;
+    z-index: 10;
+  }
+  #m_header h1 {
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 75%;
+    line-height: 53px;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  #m_header .btn_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    border : none;
+    background: transparent;
+  }
+  #m_header .btn_close img {
+    width: 17px;
+  }
+  #m_header .paging {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 50px;
+    line-height: 53px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  #m_header .paging em {
+    color: #f1648a;
+    font-style: normal;
+  }
+  
+  #m_container {
+    position: relative;
+    top: 0;
+    overflow-y: auto;
+    padding: 73px 18px 0;
+    height: 100%;
+  }
+  .card.intro {
+    padding: 0;
+  }
+  .card.intro .cont {
+    padding: 30% 40px 100px;
+    width: 100%;
+    text-align: center;
+  }
+  .card.intro .cont .pic {
+    margin-bottom: 35px;
+  }
+  .card.intro .cont img {
+    width: 103px;
+  }
+  .card.intro .cont .txt1 {
+    margin-bottom: 15px;
+    line-height: 26px;
+    font-size: 20px;
+  }
+  .card.intro .cont .txt2 {
+    color: #777;
+    line-height: 18px;
+    font-size: 12px;
+  }
+  
+  .card.on {
+    display: block;
+  }
+  .card {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100px;
+    width: 100%;
+    min-height: 592px;
+    border-radius: 17px;
+    background: #fff;
+  }
+  .card .logo {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    height: 14px;
+    text-align: center;
+  }
+  /* .card .logo img { width: 109px; vertical-align: top; } */
+  .card .logo img {
+    height: 16px;
+    vertical-align: top;
+  }
+  .card .cont {
+    padding: 55px 21px 20px;
+    text-align: center;
+    max-height: 483px;
+    overflow-y: auto;
+  }
+  .card .cont::-webkit-scrollbar {
+    width: 6px;
+  }
+  .card .icon {
+    margin-bottom: 40px;
+  }
+  .card .icon img {
+    width: 76px;
+  }
+  .card .question {
+    margin-bottom: 28px;
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+  }
+  .card .answer {
+    position: relative;
+    text-align: left;
+  }
+  .card .answer .alist {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+  }
+  .card .answer textarea {
+    padding: 12px;
+    width: 100%;
+    height: 117px;
+    border: 2px solid #e8e8e8;
+    border-radius: 5px;
+    line-height: 19px;
+    font-size: 13px;
+  }
+  
+  .checks {
+    position: relative;
+    margin-top: 10px;
+  }
+  .checks:first-child {
+    margin-top: 0;
+  }
+  .checks input[type="checkbox"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  .checks input[type="checkbox"] + label {
+    display: inline-block;
+    position: relative;
+    line-height: 24px;
+    font-size: 15px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  .checks input[type="checkbox"] + label:before {
+    content: " ";
+    display: inline-block;
+    margin-right: 7px;
+    width: 24px;
+    height: 24px;
+    line-height: 21px;
+    background: url("/img/interview/check_off.png") no-repeat 0 0;
+    background-size: 24px 24px;
+    vertical-align: top;
+  }
+  .checks input[type="checkbox"]:checked + label:before {
+    background-image: url("/img/interview/check_on.png");
+  }
+  
+  .radios {
+    position: relative;
+    margin-top: 10px;
+  }
+  .radios:first-child {
+    margin-top: 0;
+  }
+  .radios input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  .radios input[type="radio"] + label {
+    display: inline-block;
+    position: relative;
+    line-height: 24px;
+    font-size: 15px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  .radios input[type="radio"] + label:before {
+    content: " ";
+    display: inline-block;
+    margin-right: 7px;
+    width: 24px;
+    height: 24px;
+    line-height: 21px;
+    background: url("/img/interview/radio_off.png") no-repeat 0 0;
+    background-size: 24px 24px;
+    vertical-align: top;
+  }
+  .radios input[type="radio"]:checked + label:before {
+    background-image: url("/img/interview/radio_on.png");
+  }
+  
+  .interview_preview .btn_area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 18px;
+    width: 100%;
+    line-height: 0;
+    font-size: 0;
+    background: #e7e7e7;
+    z-index: 10;
+  }
+  .interview_preview .btn_area .inner {
+    overflow: hidden;
+    border-radius: 0 0 17px 17px;
+  }
+  .interview_preview .btn {
+    display: inline-block;
+    height: 50px;
+    line-height: 18px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0;
+    vertical-align: top;
+  }
+  .interview_preview .btn.full {
+    width: 100%;
+  }
+  .interview_preview .btn.half {
+    width: 50%;
+  }
+  .interview_preview .btn.pink {
+    color: #fff;
+    border: 0 none;
+    background: #f1658a;
+  }
+  .interview_preview .btn.blue {
+    color: #fff;
+    border: 0 none;
+    background: #41c2d1;
+  }
+  .interview_preview .btn.gray {
+    color: #fff;
+    border: 0 none;
+    background: #5f6164;
+  }
+  .interview_preview .btn.disabled {
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 1;
+  }

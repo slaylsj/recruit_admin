@@ -47,7 +47,7 @@ export default class Utils {
         localStorage.removeItem("userNm");
     }
     static chkToken = () => {
-        if(localStorage.getItem("login_token") == null || localStorage.getItem("login_token") == "null" || localStorage.getItem("login_token") == "") {
+        if(localStorage.getItem("login_token") === null || localStorage.getItem("login_token") === "null" || localStorage.getItem("login_token") === "") {
             return false;	    			
         } else {
             return true;
@@ -113,7 +113,7 @@ export default class Utils {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("GET", contentsFilePath, false);
             xmlhttp.send();
-            if (xmlhttp.status==200) {
+            if (xmlhttp.status===200) {
                 contents = xmlhttp.responseText;
             }else{
                 contents = "[REQUEST_FILE_ERROR] 데이터 조회 시 문제가 발생하였습니다."

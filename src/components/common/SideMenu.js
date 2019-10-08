@@ -3,6 +3,8 @@ import RecruitMgmt from "../../containers/RecruitMgmt";
 import RecruitWrite from "../../containers/RecruitWrite";
 import RecruitModify from "../../containers/RecruitModify";
 import RecruitQnaMgmt from "../../containers/RecruitQnaMgmt";
+import WebInterviewMgmt from "../../containers/WebInterviewMgmt";
+import WebInterviewWrite from "../../containers/WebInterviewWrite";
 
 var sideMenus = [
     {
@@ -40,6 +42,13 @@ var sideMenus = [
         icon: "question circle outline",
         id : 300,
         child: []
+    },
+    {
+        path: "/interviewMgmt",
+        name: "웹설문 관리",
+        icon: "clipboard outline",
+        id : 400,
+        child: []
     }
 ];
 
@@ -68,6 +77,21 @@ var menuRoutes = [
         path: "/recruitQnaMgmt",
         exact: false,
         component: RecruitQnaMgmt
+    },
+    {
+        path: "/interviewMgmt",
+        exact: false,
+        component: WebInterviewMgmt
+    },
+    {
+        path: "/interviewWrite",
+        exact: false,
+        component: WebInterviewWrite
+    },
+    {
+        path: "/interviewModify/:surveyID",
+        exact: false,
+        component: WebInterviewWrite
     },
     { 
         redirect: true, 

@@ -3,6 +3,7 @@ import ApplyStore from './ApplyStore';
 import RecruitStore from './RecruitStore';
 import QnaStore from './QnaStore';
 import SessionStore from './SessionStore';
+import InterviewStore from './InterviewStore';
 
 class RootStore {
     constructor() {
@@ -11,6 +12,7 @@ class RootStore {
         this.recruitStore = new RecruitStore(this);
         this.qnaStore = new QnaStore(this);
         this.sessionStore = new SessionStore(this);
+        this.interviewStore = new InterviewStore(this);
     }
 }
 

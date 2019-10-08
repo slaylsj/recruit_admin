@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Table, Checkbox, Input, Button, Select, Confirm } from 'semantic-ui-react';
+import { Header, Table, Button, Confirm } from 'semantic-ui-react';
 import QnaWrite from '../components/qna/QnaWrite';
 import { inject, observer } from 'mobx-react';
 import AlertModal from '../components/common/AlertModal';

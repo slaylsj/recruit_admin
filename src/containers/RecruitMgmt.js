@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Table, Checkbox, Input, Button, Select, Confirm } from 'semantic-ui-react';
+import { Header, Table, Button, Select, Confirm } from 'semantic-ui-react';
 import { inject, observer} from 'mobx-react';
 import RecruitItemList from '../components/recruit/RecruitItmeList';
 import RecruitDetail from '../components/recruit/RecruitDetail';

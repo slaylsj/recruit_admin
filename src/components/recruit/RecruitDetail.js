@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 const RecruitDetail = (props) => {
     const { sTitle, sContents, contents, dtEndView, nFinishDay, nRecruitType} = props.data;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Table, Checkbox, Input, Button, Select, Confirm } from 'semantic-ui-react';
+import { Header, Table, Input, Button, Select, Confirm } from 'semantic-ui-react';
 import { inject, observer } from 'mobx-react';
 import ApplyItemList from '../components/recruitApply/ApplyItemList'
 import AlertModal from '../components/common/AlertModal';
@@ -162,7 +162,7 @@ class ApplyList extends React.Component {
 
     // 파일 다운로드
     hadnleFileDownload = (filePath) => {
-        const fileName = new String(filePath).substring(filePath.lastIndexOf("/")+1);
+        const fileName = filePath.substring(filePath.lastIndexOf("/")+1);
         const url = '/' + encodeURI(filePath);
         const link = document.createElement('a');
         link.href = url;

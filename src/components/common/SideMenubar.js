@@ -67,7 +67,6 @@ class SideMenubar extends React.Component{
     render(){
         const { animation, visible, routes } = this.props;
         const { activeIndex, activeSubIndex } = this.state;
-        const { userName } = this.props.loginStore;
         return(
             <Sidebar
                 as={Menu}

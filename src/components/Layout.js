@@ -3,7 +3,6 @@ import { Segment, Sidebar, Icon } from 'semantic-ui-react';
 import { menuRoutes, sideMenus } from "./common/SideMenu";
 import SideMenubar from './common/SideMenubar';
 import { Route, Switch, Redirect } from "react-router-dom";
-import Utils from '../utils/Utils';
 import { inject, observer } from 'mobx-react';
 
 @inject("sessionStore")
@@ -23,7 +22,7 @@ class Layout extends React.Component {
     }
     componentDidMount(){
         // 로그인정보가 없는경우.
-        console.log("Layout componentDidMount " ,window.location.pathname);
+        // console.log("Layout componentDidMount " ,window.location.pathname);
         if( window.location.pathname !== "/" &&  window.location.pathname !== "/index"){
             if( localStorage.getItem("userID") === null || localStorage.getItem("userID") === ""){
                 window.location.href = "/";

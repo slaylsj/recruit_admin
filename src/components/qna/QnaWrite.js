@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Header, Image, Modal, Form, TextArea } from 'semantic-ui-react'
+import { Button, Modal, Form, TextArea } from 'semantic-ui-react'
 
 const QnaWrite = (props) => {
     const { open, addFlag, question, answer } = props.data;

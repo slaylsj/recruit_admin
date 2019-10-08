@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Header, Image, Modal, Form, TextArea } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react'
 
 const ApplyDownload = (props) => {
     const { open, resumeUrl, portfolioUrl} = props.data;

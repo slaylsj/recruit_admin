@@ -2,14 +2,7 @@ import React from 'react';
 import { Table, Checkbox, Header, Image } from 'semantic-ui-react';
 
 const ApplyItem = (props) => {
-    const { idx, data, listCheckValue, handleClickCheckBox, handleClickDetail, handleProfileModalOpen } = props;
-    const finishDay = (day) => {
-        let returnVal = "";
-        if(day < 0) returnVal = "접수마감";
-        else if(day === 0) returnVal = "D-day";
-        else returnVal = "D-" + day;
-        return returnVal;
-    }
+    const { idx, data, listCheckValue, handleClickCheckBox, handleProfileModalOpen } = props;
     const companyNm = (company) => {
         let returnVal = "";
         if(company === 'banaple') returnVal = '바나플';
