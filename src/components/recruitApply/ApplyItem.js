@@ -13,6 +13,11 @@ const ApplyItem = (props) => {
     }
     const renderOrderItems = (data, listCheckValue, handleClickCheckBox) => {
         const rows = []
+        const getSexType = (type) => {
+            if(type === 0) return '(남)'
+            else if(type === 1) return '(여)'
+            else return ''
+        }
         rows.push(
             <Table.Row>
                 <Table.Cell textAlign="center"><Checkbox label="" value={data.nSubmitID} onClick={handleClickCheckBox} checked={ data.nSubmitID === listCheckValue ? true : false } /></Table.Cell>
@@ -24,7 +29,8 @@ const ApplyItem = (props) => {
                 <Header as='h4' image>
                     {data.sProfileImageUrl !== '' ? <Image className="img-profile" src={`/${data.sProfileImageUrl}`} rounded size='mini' onClick={() => handleProfileModalOpen(data.nSubmitID)}/> : null}
                     <Header.Content>
-                        {data.sName} <Header.Subheader>{data.sBirthDayYear}{data.sBirthDayYear.length > 0? '년' : ''}</Header.Subheader>
+                        {data.sName} 
+                        <Header.Subheader>{data.sBirthDayYear}{data.sBirthDayYear.length > 0? '년' : ''} {getSexType(data.nSexType)}</Header.Subheader>
                     </Header.Content>
                 </Header>
                 </Table.Cell>

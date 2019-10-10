@@ -550,6 +550,10 @@ class WebInterviewWrite extends React.Component{
         this.setState({ ...this.state, historyViewModal : { open : false, type : 0, tIdx : 0 }});
     }
 
+    // 취소
+    handleWriteCancel = () => {
+        history.push('/interviewMgmt')
+    }
 
     render(){
         const { company, title, web_title, explanation, footer, questionList, preViewModal, alertModal, historyViewModal } = this.state
@@ -605,7 +609,7 @@ class WebInterviewWrite extends React.Component{
                         <div className="button-group" style={{textAlign: "center", "marginTop":"50px"}}>
                             <Button color="teal" className="wt-btn-preview" onClick={this.handlePreviewModalOpen} >미리보기</Button>
                             <Button color="blue" className="wt-btn-save" onClick={this.handleSave} >완료</Button>
-                            <Button color="grey" className="wt-btn-preview" onClick={() => history.push('/interviewMgmt')} >취소</Button>
+                            <Button color="grey" className="wt-btn-preview" onClick={this.handleWriteCancel} >취소</Button>
                         </div>
                     </Form>
                 </div>
