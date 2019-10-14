@@ -152,6 +152,20 @@ class RecruitMgmt extends React.Component {
         }
     }
 
+    // Link URL 복사
+    handleCopyUrl = (nRecruitID, sCompany) => {
+        let urlPath = '';
+        if(sCompany === 'banaple') urlPath = 'http://banaple.co.kr/recruit';
+        else urlPath = 'http://banapresso.com/recruit';
+        let t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = urlPath + '?rID=' + nRecruitID;
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+        alert('URL Link Copy !!');
+    }
+
     render(){
         const { listCheckValue, detailView, detailData, confirmModal, alertModal } = this.state;
         const { recruitList } = this.props.recruitStore;
@@ -187,10 +201,11 @@ class RecruitMgmt extends React.Component {
                                         <Table.HeaderCell style={{ width:"100px", textAlign:"center" }} >채용구분 </Table.HeaderCell>
                                         <Table.HeaderCell style={{ textAlign:"center" }} >모집 공고</Table.HeaderCell>
                                         <Table.HeaderCell style={{ width:"200px", textAlign:"center" }} >기간</Table.HeaderCell>
+                                        <Table.HeaderCell style={{ width:"100px", textAlign:"center" }} >링크 URL</Table.HeaderCell>
                                     </Table.Row>
                                 </Table.Header>
 
-                                <RecruitItemList recruitList={recruitList} listCheckValue={listCheckValue} handleClickCheckBox={this.handleClickCheckBox} handleClickDetail={this.handleClickDetail} />
+                                <RecruitItemList recruitList={recruitList} listCheckValue={listCheckValue} handleClickCheckBox={this.handleClickCheckBox} handleClickDetail={this.handleClickDetail} handleCopyUrl={this.handleCopyUrl}/>
                             </Table>
                         </div>
                     </div>

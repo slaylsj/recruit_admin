@@ -1,8 +1,8 @@
 import React from 'react';
-import { Table, Checkbox } from 'semantic-ui-react';
+import { Table, Checkbox, Button } from 'semantic-ui-react';
 
 const RecruitItem = (props) => {
-    const { idx, data, listCheckValue, handleClickCheckBox, handleClickDetail } = props;
+    const { idx, data, listCheckValue, handleClickCheckBox, handleClickDetail, handleCopyUrl } = props;
     const finishDay = (day, nRecruitType) => {
         let returnVal = "";
         if(day < 0) returnVal = "접수마감";
@@ -27,6 +27,7 @@ const RecruitItem = (props) => {
             <Table.Cell textAlign="center">{data.nRecruitType === 0 ? "정시" : "상시"}</Table.Cell>
             <Table.Cell className="rec-title" onClick={() => handleClickDetail(data.nRecruitID)}><b>{data.sTitle}</b><br/> ~ {data.dtEndView}</Table.Cell>
             <Table.Cell textAlign="center">{finishDay(data.nFinishDay, data.nRecruitType)}</Table.Cell>
+            <Table.Cell className="center"><Button color='blue' onClick={()=> handleCopyUrl(data.nRecruitID, data.sCompany)}>복사</Button></Table.Cell>
         </Table.Row>
     );
 }

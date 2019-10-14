@@ -55,7 +55,7 @@ class SideMenubar extends React.Component{
             "sPW": "logout",
             "btoken": 0,
             "sCToken": login_token,
-            "sIP": this.props.loginStore.clientIP,
+            "sIP": "@ip",
             "sMacAddress": "B8:97:5A:EF:8E:F0"
         };
         this.logoutProcess(params, (data) => {

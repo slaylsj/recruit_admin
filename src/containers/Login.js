@@ -18,25 +18,22 @@ class Login extends React.Component{
             sMacAddress : "",
             errMsg : ""
         }
-        this.getClientIP = (fCallback) => this.props.loginStore.getClientIP(fCallback);
         this.loginProcess = (params, fCallback) => this.props.loginStore.loginProcess(params, fCallback);
     }
 
     componentDidMount(){
-        this.getClientIP(() => {
-            //토큰값이 있는경우 자동로그인 시도
-            if(Utils.chkToken() === true) {	 
-                const params = {
-                    sID : "",
-                    sPW : "",
-                    btoken : 0,
-                    sCToken : Utils.getToken(),
-                    sIP : this.props.loginStore.clientIP,
-                    sMacAddress : "B8:97:5A:EF:8E:F0"
-                }
-                this.handleLogin(params);
+        //토큰값이 있는경우 자동로그인 시도
+        if(Utils.chkToken() === true) {	 
+            const params = {
+                sID : "",
+                sPW : "",
+                btoken : 0,
+                sCToken : Utils.getToken(),
+                sIP : "@ip",
+                sMacAddress : "B8:97:5A:EF:8E:F0"
             }
-        });
+            this.handleLogin(params);
+        }
     }
     
     // 등록, 수정 입력
@@ -60,7 +57,7 @@ class Login extends React.Component{
             sPW : this.state.loginPW,
             btoken : this.state.btoken,
             sCToken : "",
-            sIP : this.props.loginStore.clientIP,
+            sIP : "@ip",
             sMacAddress : "B8:97:5A:EF:8E:F0"
         }
         this.handleLogin(params);

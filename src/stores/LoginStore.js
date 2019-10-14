@@ -9,37 +9,6 @@ export default class LoginStore {
     @observable userName = null
 
     @action
-    getClientIP = (callback) => {
-        this.isFetching = true
-        this.error = null
-        try{
-            let axiosConfig = {
-                headers : {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    'Accept': "application/json; charset=UTF-8"
-                }   
-            }
-            Axios.getJsonp("https://api.ipify.org?format=jsonp", null, axiosConfig, (result) => {
-                this.clientIP = result.ip;
-                callback();
-            },(err) => {
-                console.log('[ERROR]LoginStore getClientIP Fail ', err);
-                this.clientIP = "127.0.0.1";  
-                callback();
-            });
-            this.isFetching = false
-            
-        }catch(e){
-            //this.showWarning();
-            console.log('[ERROR]LoginStore.getClientIP', e);
-            this.error = e
-            this.isFetching = false
-            this.clientIP = "127.0.0.1";  
-            callback();
-        }
-    }
-
-    @action
     loginProcess = (params, callback) => {
         this.isFetching = true
         this.error = null
