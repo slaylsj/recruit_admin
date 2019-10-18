@@ -353,7 +353,7 @@
     
     function callAjaxForHTML5 (tempFile, sUploadURL){
 
-		const domain = "http://www.banapresso.com";
+		const domain = "https://www.banapresso.com";
         const filePath = "banapresso/admin/notice/video/";
         const video_url = domain + "/from_open_storage?ws=fprocess&file=" + filePath + tempFile.name;
 

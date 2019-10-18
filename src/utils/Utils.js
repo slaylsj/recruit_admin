@@ -1,9 +1,13 @@
 const properties = {
     // FILE_DOMAIN : 'http://localhost:8080'
-    FILE_DOMAIN : 'http://banapresso.com'
+    FILE_DOMAIN : 'https://banapresso.com'
 } 
 
 export default class Utils {
+
+    static getDomain = () => {
+        return properties.FILE_DOMAIN;
+    }
     
     static converDateFormat = (str) => {
         var timestamp = Date.parse(str);

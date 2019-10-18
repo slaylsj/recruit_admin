@@ -156,7 +156,7 @@ class RecruitMgmt extends React.Component {
     handleCopyUrl = (nRecruitID, sCompany) => {
         let urlPath = '';
         if(sCompany === 'banaple') urlPath = 'http://banaple.co.kr/recruit';
-        else urlPath = 'http://banapresso.com/recruit';
+        else urlPath = Utils.getDomain() + '/recruit';
         let t = document.createElement("textarea");
         document.body.appendChild(t);
         t.value = urlPath + '?rID=' + nRecruitID;
