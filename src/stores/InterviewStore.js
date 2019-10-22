@@ -425,4 +425,43 @@ export default class InterviewStore {
             this.isFetching = false
         }
     }
+
+    @action
+    getInterviewStepItem = (params, callback) => {
+        this.isFetching = true
+        this.error = null
+        try{
+            let axiosConfig = {
+                headers : {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    'Accept': "application/json; charset=UTF-8"
+                }   
+            }
+            let data = { 
+                ws: 'fprocess',
+                query: 'GMDBHQDCCUHLFF38JP6K',
+                params: params
+            } // web_select_banapresso_interview_step_item
+            data = JSON.stringify(data);
+            Axios.post("/query", data, axiosConfig, (result) => {
+                const columns = result.data.columns.map(d => { return d.name });
+                const stepItemList = result.data.rows.map((rowObj) => {
+                    let obj = {};
+                    columns.forEach((element, idx) => { obj[element] = rowObj[idx] });
+                    return obj;
+                });
+                callback( { return : 1, sError : '', list : stepItemList });
+
+            }, (err) => {
+                const errMsg = "처리중에 문제가 발생하였습니다. ["+ err.message +"]";
+                callback( { return : 0, sError : errMsg});
+            });
+            this.isFetching = false
+        }catch(e){
+            //this.showWarning();
+            console.log('[ERROR]InterviewStroe.getInterviewStepItem', e);
+            this.error = e
+            this.isFetching = false
+        }
+    }
 }

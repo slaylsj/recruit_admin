@@ -46,6 +46,7 @@ class WebInterviewWrite extends React.Component{
         this.getTotalStepCnt = () => this.props.interviewStore.getTotalStepCnt();
         this.setStepData = (step, fcallback) => this.props.interviewStore.setStepData(step, fcallback);
         this.getInterviewHistory = (params, fCallback) => this.props.interviewStore.getInterviewHistory(params, fCallback);
+        this.getInterviewStepItem = (params, fCallback) => this.props.interviewStore.getInterviewStepItem(params, fCallback);
     }
 
     componentDidMount(){
@@ -530,7 +531,7 @@ class WebInterviewWrite extends React.Component{
     }
 
     // 이력 내용 선택
-    handleSelectHistory = (nType, sText) => {
+    handleSelectHistory = (nType, nStepId, answerType, sText) => {
         if(nType === 0){ // 설문지 설명
             this.setState({ ...this.state, explanation : sText, historyViewModal : { open : false, type : 0, tIdx : 0 }});
         }else if(nType === 1){ // 끝맺음
@@ -538,10 +539,41 @@ class WebInterviewWrite extends React.Component{
         }else if(nType === 2){ // 문항
             const { questionList, historyViewModal } = this.state;
             const { tIdx } = historyViewModal;
-            this.setState({ ...this.state, historyViewModal : { open : false, type : 0, tIdx : 0 }, questionList : questionList.map((data, idx) => {
-                    return (idx === tIdx ? {...data, 'question' : sText, option_1 : data.option_1, option_2 : data.option_2 } : data )
-                }) 
-            });
+            if(answerType > 0){
+                const params = {
+                    nFCode: '@nFCode',
+                    nStepID : nStepId
+                };
+                this.getInterviewStepItem(params, (data) => {
+                    if(data.return === 1){
+                        const stepItem = data.list;
+                        const step_option_list = stepItem.map((data,idx) => {
+                            return {id: idx, nOption: data.nOption, sOption : data.sOption};
+                        });
+                        if(answerType === 1){
+                            this.setState({ ...this.state, historyViewModal : { open : false, type : 0, tIdx : 0 }, questionList : questionList.map((data, idx) => {
+                                return (idx === tIdx ? {...data, 'answer_type' : answerType,  'question' : sText, option_1 : step_option_list, option_2 : data.option_2 } : data )
+                                }) 
+                            });
+                        }else if(answerType === 2){
+                            this.setState({ ...this.state, historyViewModal : { open : false, type : 0, tIdx : 0 }, questionList : questionList.map((data, idx) => {
+                                return (idx === tIdx ? {...data, 'answer_type' : answerType, 'question' : sText, option_1 : data.option_1, option_2 : step_option_list } : data )
+                                }) 
+                            });
+                        }
+                    }else{
+                        this.setState({ ...this.state, historyViewModal : { open : false, type : 0, tIdx : 0 }, questionList : questionList.map((data, idx) => {
+                            return (idx === tIdx ? {...data, 'answer_type' : answerType, 'question' : sText, option_1 : data.option_1, option_2 : data.option_2 } : data )
+                            }) 
+                        });
+                    }
+                })
+            }else{
+                this.setState({ ...this.state, historyViewModal : { open : false, type : 0, tIdx : 0 }, questionList : questionList.map((data, idx) => {
+                    return (idx === tIdx ? {...data, 'answer_type' : answerType, 'question' : sText, option_1 : data.option_1, option_2 : data.option_2 } : data )
+                    }) 
+                });
+            }
         }
     }
 

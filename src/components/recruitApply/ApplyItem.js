@@ -25,9 +25,9 @@ const ApplyItem = (props) => {
                 <Table.Cell textAlign="center">{companyNm(data.sCompany)}</Table.Cell>
                 <Table.Cell >{data.sTitle}</Table.Cell>
                 {/* <Table.Cell textAlign="center">{data.sName} </Table.Cell> */}
-                <Table.Cell textAlign="center">
+                <Table.Cell className="cursor-pointer" textAlign="center" onClick={() => handleProfileModalOpen(data.nSubmitID)}>
                 <Header as='h4' image>
-                    {data.sProfileImageUrl !== '' ? <Image className="img-profile" src={`/${data.sProfileImageUrl}`} rounded size='mini' onClick={() => handleProfileModalOpen(data.nSubmitID)}/> : null}
+                    {data.sProfileImageUrl !== '' ? <Image src={`/${data.sProfileImageUrl}`} rounded size='mini' /> : null}
                     <Header.Content>
                         {data.sName} 
                         <Header.Subheader>{data.sBirthDayYear}{data.sBirthDayYear.length > 0? '년' : ''} {getSexType(data.nSexType)}</Header.Subheader>
@@ -38,7 +38,7 @@ const ApplyItem = (props) => {
                 {/* <Table.Cell textAlign="center">{data.sBirthDayYear}{data.sBirthDayYear.length > 0? '년' : ''}</Table.Cell> */}
                 <Table.Cell textAlign="center">{data.sResumeUrl !== '' ? 'O' : 'X'} / {data.sPortfolioUrl !== '' ? 'O' : 'X'}</Table.Cell>
                 <Table.Cell textAlign="center">{data.dtSubmitDate}</Table.Cell>
-                <Table.Cell >{data.sMemo}</Table.Cell>
+                <Table.Cell className="cursor-pointer white-space-pre" onClick={() => handleProfileModalOpen(data.nSubmitID)}>{data.sMemo}</Table.Cell>
             </Table.Row>
         )
         // rows.push(

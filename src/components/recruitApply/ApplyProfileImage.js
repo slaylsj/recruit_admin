@@ -1,14 +1,29 @@
 import React from 'react';
-import { Button, Image, Modal } from 'semantic-ui-react'
+import { Button, Image, Modal, Item } from 'semantic-ui-react'
 
 const ApplyProfileImage = (props) => {
-    const { open, profileImageUrl} = props.data;
+    const { open, profileImageUrl, sName, nSexType, sBirthDayYear, sMemo} = props.data;
     const { handleProfileModalClose} = props;
+    const getSexType = (type) => {
+        if(type === 0) return '(남)'
+        else if(type === 1) return '(여)'
+        else return ''
+    }
     return(
-        <Modal open={open} onClose={handleProfileModalClose} className="apply-download">
-            <Modal.Header>본인사진 첨부파일</Modal.Header>
+        <Modal open={open} onClose={handleProfileModalClose} className="applicant-info">
+            <Modal.Header>지원자 정보</Modal.Header>
             <Modal.Content>
-                <Image src={`/${profileImageUrl}`} rounded size='large' />
+                <Item.Group>
+                    <Item>
+                        <Item.Image size='medium' src={`/${profileImageUrl}`} />
+                        <Item.Content>
+                            <Item.Header as='a'>{sName} - {getSexType(nSexType)} {sBirthDayYear}{sBirthDayYear.length > 0? '년' : ''} </Item.Header>
+                            <Item.Description>
+                            <p>{sMemo}</p>
+                            </Item.Description>
+                        </Item.Content>
+                    </Item>
+                </Item.Group>
             </Modal.Content>
             <Modal.Actions>
                 <Button color='grey' onClick={handleProfileModalClose}>닫기</Button>

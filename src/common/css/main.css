@@ -52,7 +52,8 @@
 /* Contents */
 .contents { margin : 50px 20px !important;}
 .content-data { min-height: 900px; }
-.content-pagination { text-align: center; margin-top: 10px; }
+.content-pagination { text-align: center; margin-top: 10px; position: relative; }
+.content-pagination .select-pagerow { position: absolute; height: 42px; right: 0px; top: -1px; width: 100px; }
 
 /* 지원서 조회 */
 .apply-download { width: 570px !important; }
@@ -90,9 +91,16 @@
 .apply-download .portfolio.active:hover{
     background-color: #c7486e;
 }
-.img-profile {
+.cursor-pointer {
     cursor: pointer;
 }
+.white-space-pre {
+  white-space: pre;
+}
+
+
+/* 지원자 정보 조회 */
+.applicant-info { width: 770px !important; }
 
 
 /* Write */
@@ -205,6 +213,7 @@
 /* 웹설문 만들기 */
 /* 명접 질문 만들기 */
 .interview-history { width: 760px !important; }
+.interview-history .h-title { font-weight: 700; color: #f2591e; }
 .interview-history .history-list { overflow-y: scroll; height: 650px; max-height: 650px;}
 .interview-history .history-list .content {line-height: 17px !important;  padding: 3px !important;}
 .btn_option { position: absolute; left: 30px; top: 90px; }

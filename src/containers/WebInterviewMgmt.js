@@ -222,11 +222,11 @@ class WebInterviewMgmt extends React.Component {
                             <Table.Row>
                                 <Table.HeaderCell style={{ width:"50px" }}></Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"60px", textAlign:"center" }} >번호</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"250px", textAlign:"center" }} >구분</Table.HeaderCell>
+                                <Table.HeaderCell style={{ textAlign:"center" }} >구분</Table.HeaderCell>
                                 <Table.HeaderCell style={{ textAlign:"center" }} >제목</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"250px", textAlign:"center" }} >작성일</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"250px", textAlign:"center" }} >작성자</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"250px", textAlign:"center" }} >설문 문항</Table.HeaderCell>
+                                <Table.HeaderCell style={{ textAlign:"center" }} >작성일</Table.HeaderCell>
+                                <Table.HeaderCell style={{ textAlign:"center" }} >작성자</Table.HeaderCell>
+                                <Table.HeaderCell style={{ textAlign:"center" }} >설문 문항</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 

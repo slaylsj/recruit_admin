@@ -23,7 +23,11 @@ class ApplyList extends React.Component {
             },
             profileImageModal : {
                 open : false,
-                profileImageUrl : "", 
+                sName : "", 
+                nSexType : -1, 
+                sBirthDayYear : "", 
+                sMemo : "",
+                profileImageUrl : "" 
             },
             downloadModal : {
                 open : false,
@@ -50,6 +54,8 @@ class ApplyList extends React.Component {
     componentDidUpdate(prevProps, prevState){
         if (prevState.searchParam.company !== this.state.searchParam.company) {
             this.handleSearch(1);
+        }else if (prevState.pageInfo.pageRow !== this.state.pageInfo.pageRow) {
+            this.handleSearch(1);
         }
     }
 
@@ -68,6 +74,11 @@ class ApplyList extends React.Component {
     // 검색조건 변경 이벤트
     handleChange = (e, {name, value}) => {
         this.setState({...this.state, searchParam : { ...this.state.searchParam, [name]: value }});
+    }
+
+    // 페이지 Row 변경.
+    handlePageRowChange = (e, {name, value}) => {
+        this.setState({...this.state, pageInfo : { ...this.state.pageInfo, [name]: value }});
     }
 
     // 엔터키 조회
@@ -132,13 +143,27 @@ class ApplyList extends React.Component {
         // 선택된 데이터 정보 추출.
         const targetQnaIndex = applyList.map( data => { return data.nSubmitID }).indexOf(submitID);
         let selectData = Object.assign({}, applyList[targetQnaIndex]);
-        this.setState({ ...this.state, profileImageModal : { open: true, profileImageUrl : selectData.sProfileImageUrl }});
+        this.setState({ ...this.state, profileImageModal : { 
+            open: true, 
+            sName : selectData.sName, 
+            nSexType : selectData.nSexType, 
+            sBirthDayYear : selectData.sBirthDayYear, 
+            sMemo : selectData.sMemo,
+            profileImageUrl : selectData.sProfileImageUrl}
+        });
     
     }
 
     // 프로필사진 모달 닫기
     handleProfileModalClose = () => {
-        this.setState({ ...this.state, profileImageModal : { open: false, profileImageUrl : '' }});
+        this.setState({ ...this.state, profileImageModal : { 
+            open: false, 
+            sName : '', 
+            nSexType : -1, 
+            sBirthDayYear : '', 
+            sMemo : '',
+            profileImageUrl : ''}
+        });
     }
 
     // 다운로드 모달 열기
@@ -185,6 +210,12 @@ class ApplyList extends React.Component {
             { key: 'gubun3', text: '바나플F&B', value: 'banaplefnb' },
             { key: 'gubun4', text: '바나프레소', value: 'banapresso' },
         ]
+        const page_options = [
+            { key: 'row1', text: '10', value: '10' },
+            { key: 'row2', text: '20', value: '20' },
+            { key: 'row3', text: '30', value: '30' },
+            { key: 'row4', text: '50', value: '50' }
+        ]
 
         return (
             <div className="body-contents">
@@ -199,7 +230,7 @@ class ApplyList extends React.Component {
                     </div>
                 </div>
                 <div className="content-data">
-                    <Table color="blue">
+                    <Table color="blue" fixed table>
                         <Table.Header>
                             <Table.Row>
                                 <Table.HeaderCell style={{ width:"50px" }}></Table.HeaderCell>
@@ -220,6 +251,9 @@ class ApplyList extends React.Component {
                 </div>
                 <div className="content-pagination">
                     <PaginationTemplet totalCnt={totalCnt} pageInfo={pageInfo} handlePaginationChange={this.handlePaginationChange} />
+                    <div className='select-pagerow' >
+                        <Select fluid required={true} options={page_options} name="pageRow" defaultValue="10" onChange={this.handlePageRowChange} />
+                    </div> 
                 </div>
 
                 <ApplyProfileImage data={profileImageModal} handleProfileModalClose={this.handleProfileModalClose} />
