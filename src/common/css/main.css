@@ -101,7 +101,28 @@
 
 /* 지원자 정보 조회 */
 .applicant-info { width: 770px !important; }
+.applicant-info .download-layer { float: right; }
+.applicant-info .resume, .applicant-info .portfolio { 
+    float: right;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 15px;
+    margin-top: -7px;
+    margin-left: 10px;
+}
 
+.applicant-info .resume.active {
+    border: 2px solid #2b72bb;
+    background-color: #528eca;
+    cursor: pointer; 
+ }
+  
+.applicant-info .portfolio.active { 
+  border: 2px solid #bb2b3e;
+  background-color: #ca5276;
+  cursor: pointer;
+}
 
 /* Write */
 #recruit-write { margin:50px 20px; line-height: 1.7em; }

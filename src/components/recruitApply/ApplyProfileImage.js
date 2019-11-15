@@ -2,7 +2,9 @@ import React from 'react';
 import { Button, Image, Modal, Item } from 'semantic-ui-react'
 
 const ApplyProfileImage = (props) => {
-    const { open, profileImageUrl, sName, nSexType, sBirthDayYear, sMemo} = props.data;
+    const { data, handleFileDownload } = props;
+    const { open, profileImageUrl, resumeUrl, portfolioUrl, sName, nSexType, sBirthDayYear, sMemo} = data;
+     
     const { handleProfileModalClose} = props;
     const getSexType = (type) => {
         if(type === 0) return '(남)'
@@ -11,13 +13,18 @@ const ApplyProfileImage = (props) => {
     }
     return(
         <Modal open={open} onClose={handleProfileModalClose} className="applicant-info">
-            <Modal.Header>지원자 정보</Modal.Header>
+            <Modal.Header>지원자 정보
+                <div className="download-layer">
+                    { portfolioUrl !== ''? <div className="portfolio active" onClick={()=>handleFileDownload(portfolioUrl)}>포트폴리오</div> : null }
+                    { resumeUrl !== ''? <div className="resume active" onClick={()=>handleFileDownload(resumeUrl)}>이력서</div> : null }
+                </div>
+            </Modal.Header>
             <Modal.Content>
                 <Item.Group>
                     <Item>
                         <Item.Image size='medium' src={`/${profileImageUrl}`} />
                         <Item.Content>
-                            <Item.Header as='a'>{sName} - {getSexType(nSexType)} {sBirthDayYear}{sBirthDayYear.length > 0? '년' : ''} </Item.Header>
+                            <Item.Header>{sName} - {getSexType(nSexType)} {sBirthDayYear}{sBirthDayYear.length > 0? '년' : ''} </Item.Header>
                             <Item.Description>
                             <p>{sMemo}</p>
                             </Item.Description>

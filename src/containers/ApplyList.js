@@ -27,7 +27,9 @@ class ApplyList extends React.Component {
                 nSexType : -1, 
                 sBirthDayYear : "", 
                 sMemo : "",
-                profileImageUrl : "" 
+                profileImageUrl : "" ,
+                resumeUrl : "" , 
+                portfolioUrl : "" 
             },
             downloadModal : {
                 open : false,
@@ -149,7 +151,9 @@ class ApplyList extends React.Component {
             nSexType : selectData.nSexType, 
             sBirthDayYear : selectData.sBirthDayYear, 
             sMemo : selectData.sMemo,
-            profileImageUrl : selectData.sProfileImageUrl}
+            profileImageUrl : selectData.sProfileImageUrl,
+            resumeUrl : selectData.sResumeUrl , 
+            portfolioUrl : selectData.sPortfolioUrl }
         });
     
     }
@@ -162,7 +166,9 @@ class ApplyList extends React.Component {
             nSexType : -1, 
             sBirthDayYear : '', 
             sMemo : '',
-            profileImageUrl : ''}
+            profileImageUrl : '',
+            resumeUrl : "" , 
+            portfolioUrl : "" }
         });
     }
 
@@ -186,7 +192,7 @@ class ApplyList extends React.Component {
     }
 
     // 파일 다운로드
-    hadnleFileDownload = (filePath) => {
+    handleFileDownload = (filePath) => {
         const fileName = filePath.substring(filePath.lastIndexOf("/")+1);
         const url = '/' + encodeURI(filePath);
         const link = document.createElement('a');
@@ -194,6 +200,18 @@ class ApplyList extends React.Component {
         link.setAttribute('download', fileName);
         document.body.appendChild(link);
         link.click();
+    };
+
+    // 파일 열기
+    handleFileView = (filePath) => {
+        const fileName = filePath.substring(filePath.lastIndexOf("/")+1);
+        const url = '/' + encodeURI(filePath);
+        window.open(url, '_blank');
+        // const link = document.createElement('a');
+        // link.href = url;
+        // link.setAttribute('download', fileName);
+        // document.body.appendChild(link);
+        // link.click();
     };
 
     // 페이지 이벤트
@@ -256,8 +274,8 @@ class ApplyList extends React.Component {
                     </div> 
                 </div>
 
-                <ApplyProfileImage data={profileImageModal} handleProfileModalClose={this.handleProfileModalClose} />
-                <ApplyDownload data={downloadModal} handleDownModalClose={this.handleDownModalClose} hadnleFileDownload={this.hadnleFileDownload} />
+                <ApplyProfileImage data={profileImageModal} handleProfileModalClose={this.handleProfileModalClose} handleFileDownload={this.handleFileView} />
+                <ApplyDownload data={downloadModal} handleDownModalClose={this.handleDownModalClose} handleFileDownload={this.handleFileDownload} />
                 <Confirm open={confirmModal.open} size="tiny" content={confirmModal.message} cancelButton="취소" confirmButton="확인" onCancel={this.handleDeleteCancel} onConfirm={this.handleDeleteConfirm} />
                 <AlertModal open={alertModal.open} message={alertModal.message}  size="mini" closeModal={this.handleCloseAlertModal} />
             </div>
