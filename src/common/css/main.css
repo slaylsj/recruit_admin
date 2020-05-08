@@ -98,6 +98,13 @@
   white-space: pre;
 }
 
+/* 목록 첨부파일 여부표시 */
+.list-col { font-size: 18px; }
+.list-col > span { font-weight: 600; margin-left: 2px;}
+.list-col > span.on { color: #00b5ad;}
+.list-col > span.on1 { color: #c74ab2;}
+.list-col > span.off { color: #b6b7b7;}
+
 
 /* 지원자 정보 조회 */
 .applicant-info { width: 770px !important; }

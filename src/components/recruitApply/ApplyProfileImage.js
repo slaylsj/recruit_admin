@@ -25,8 +25,8 @@ const ApplyProfileImage = (props) => {
                         <Item.Image size='medium' src={`/${profileImageUrl}`} />
                         <Item.Content>
                             <Item.Header>{sName} - {getSexType(nSexType)} {sBirthDayYear}{sBirthDayYear.length > 0? '년' : ''} </Item.Header>
-                            <Item.Description>
-                            <p>{sMemo}</p>
+                            <Item.Description style={{ 'height':'475px', 'overflowY' : 'auto'}}>
+                            <p style={{ 'whiteSpace':'pre-line'}}>{sMemo}</p>
                             </Item.Description>
                         </Item.Content>
                     </Item>
