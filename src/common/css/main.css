@@ -725,6 +725,11 @@
     border: 0 none;
     background: #5f6164;
   }
+  .interview_preview .btn.wgray {
+    color: #fff;
+    border: 0 none;
+    background: #7087a8;
+  }
   .interview_preview .btn.disabled {
     color: rgba(255, 255, 255, 0.4);
     opacity: 1;

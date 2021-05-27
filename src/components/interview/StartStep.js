@@ -5,12 +5,13 @@ import logo_banaple from '../../common/image/banaple.png';
 
 const StartStep = (props) => {
     const { handleNextStep, startText, company } = props;
-    const btnClass = (company === "banaple" ? "blue" : company === "banapresso" ? "pink" : "wgray");
+    const btnClass = (company === "banaple" ? "blue" : company === "banapresso" ? "pink" : "pink");
     const logoImage = (company === "banaple" ? logo_banaple : company === "banapresso" ? logo_banapresso : logo_banaple);
     const setTitleView = (company) => {
         let returnVal = company;
         if(company === "banaple") returnVal = "바나플";
-        else if(company === "banapresso") returnVal = "바나프레소 F&B";
+        else if(company === "banapresso") returnVal = "바나프레소";
+        else if(company === "banaplefnb") returnVal = "바나플 F&B";
         return returnVal;
     }
     return(

@@ -592,7 +592,8 @@ class WebInterviewWrite extends React.Component{
         const { interviewList, totalCnt, activePage, nowStepData, stepText, stepCount, historyList} = this.props.interviewStore;
         const options = [
             { key: 'gubun1', text: '바나플', value: 'banaple' },
-            { key: 'gubun2', text: '바나프레소', value: 'banapresso' }
+            { key: 'gubun2', text: '바나프레소', value: 'banapresso' },
+            { key: 'gubun3', text: '바나플F&B', value: 'banaplefnb' }
         ]
 
         return (

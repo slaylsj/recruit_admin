@@ -7,6 +7,7 @@ const InterviewItem = (props) => {
         let returnVal = "";
         if(company === 'banaple') returnVal = '바나플';
         else if(company === 'banapresso') returnVal = '바나프레소';
+        else if(company === 'banaplefnb') returnVal = '바나플F&B';
         else returnVal = company;
         return returnVal;
     }
