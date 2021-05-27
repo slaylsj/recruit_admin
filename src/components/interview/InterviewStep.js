@@ -9,7 +9,7 @@ import TextItem from './TextItem';
 const InterviewStep = (props) => {
     const { step, stepData, company, handlePrevStep, handleNextStep } = props;
     const { list, sQuestion, nAnswerType } = stepData;
-    const btnClass = (company === "banaple" ? "blue" : company === "banapresso" ? "pink" : "wgray");
+    const btnClass = (company === "banaple" ? "blue" : company === "banapresso" ? "pink" : "pink");
     const logoImage = (company === "banaple" ? logo_banaple : company === "banapresso" ? logo_banapresso : logo_banaple);
     const step_num = step < 10 ? '0'+step : step;
     const question_view = (step_num, sQuestion) => {
