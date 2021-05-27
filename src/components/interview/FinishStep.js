@@ -5,7 +5,7 @@ import logo_banaple from '../../common/image/banaple.png';
 
 const FinishStep = (props) => {
     const { handleComplete, finishText, company } = props;
-    const btnClass = (company === "banaple" ? "blue" : company === "banapresso" ? "pink" : "wgray");
+    const btnClass = (company === "banaple" ? "blue" : company === "banapresso" ? "pink" : "pink");
     const logoImage = (company === "banaple" ? logo_banaple : company === "banapresso" ? logo_banapresso : logo_banaple);
     return(
         <div className="card intro on">
