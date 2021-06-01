@@ -32,6 +32,11 @@ class RecruitWrite extends React.Component {
             chkProfileImage : false,
             chkPortfolio : false,
             chkPortfolioChoise : false,
+            chkDirect : true,
+            chkJobkorea : false,
+            chkAlbamon : false,
+            txtJobkoreaUrl : '',
+            txtAlbamonUrl : '',
             oEditors : [],
             editorID : 'ir1',
             alertModal : {
@@ -43,6 +48,7 @@ class RecruitWrite extends React.Component {
                 open : false
             }
         };
+
         this.selectDepartment = (fCallback) => this.props.recruitStore.selectDepartment(fCallback);
         this.setDeptGroupList = (param) => this.props.recruitStore.setDeptGroupList(param);
         this.setDeptJobList = (param) => this.props.recruitStore.setDeptJobList(param);
@@ -87,7 +93,8 @@ class RecruitWrite extends React.Component {
     handleSave = (e) => {
         e.preventDefault();
 
-        const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, endDate } = this.state;
+        const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, endDate,
+            chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl } = this.state;
         let param_group = group, param_job = job;
 
         // 입력 값 체크.
@@ -104,7 +111,15 @@ class RecruitWrite extends React.Component {
             }else{
                 param_group = txt_group;
             }
-        } 
+        }
+        
+        if(!validationCheck && chkJobkorea && txtJobkoreaUrl === ''){
+            validationCheck = true; msg = '잡코리아 URL을 입력 하시기 바랍니다.';
+        }
+        if(!validationCheck && chkAlbamon && txtAlbamonUrl === ''){
+            validationCheck = true; msg = '알바몬 URL을 입력 하시기 바랍니다.';
+        }
+
         if(!validationCheck && job === ''){
             validationCheck = true; msg = '직무를 선택 하시기 바랍니다.';
         }else if(!validationCheck && job === '직접입력'){
@@ -145,6 +160,11 @@ class RecruitWrite extends React.Component {
                 bProfileImage : chkProfileImage,
                 bPortfolio : chkPortfolio,
                 bPortfolioChoise : chkPortfolioChoise,
+                bDirect : chkDirect,
+                bJobkorea : chkJobkorea, 
+                bAlbamon : chkAlbamon,
+                sJobkoreaUrl : chkJobkorea ? txtJobkoreaUrl : '',
+                sAlbamonUrl : chkAlbamon ? txtAlbamonUrl : '',
                 dtEnd : endDate,
                 sLoginID : localStorage.getItem("userID")
             }
@@ -193,7 +213,8 @@ class RecruitWrite extends React.Component {
     }
 
     render() {
-        const { company, group, txt_group, job, txt_job, title, contents, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, recruitType, endDate, alertModal, oEditors, previewModal, editorID } = this.state
+        const { company, group, txt_group, job, txt_job, title, contents, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl, 
+                recruitType, endDate, alertModal, oEditors, previewModal, editorID } = this.state
         const { groupList, jobList } = this.props.recruitStore;
 
         const previewData = { title: title,
@@ -276,6 +297,23 @@ class RecruitWrite extends React.Component {
                             <label className="recruit-label-2">직무</label>
                             <Form.Select className="select-type" required={true} fluid options={jobList} placeholder='선택' name="job" value={job} defaultValue={job} onChange={this.handleChange}/>
                             { job === '직접입력' ? <Form.Input className="wt-group" required={true} name="txt_job" placeholder='직무명' onChange={this.handleChange} defaultValue={txt_job} value={txt_job} /> : null }
+                        </Form.Group>
+
+                        <Form.Group inline className="apply-div">
+                            <label className="recruit-label">지원유형</label>
+                            <Form.Checkbox className="apply-type" label='본사지원' name='chkDirect' checked={chkDirect} onChange={this.handleCheckboxChange}/>
+                        </Form.Group>
+
+                        <Form.Group inline className="apply-div">
+                            <label className="recruit-label">&nbsp;</label>
+                            <Form.Checkbox className="apply-type" label='잡코리아' name='chkJobkorea' checked={chkJobkorea} onChange={this.handleCheckboxChange}/>
+                            <Form.Input className="wt-title " required={true} name="txtJobkoreaUrl" placeholder='잡코리아 URL' onChange={this.handleChange} defaultValue={txtJobkoreaUrl} value={txtJobkoreaUrl} disabled={!chkJobkorea && true}/>
+                        </Form.Group>
+                        
+                        <Form.Group inline> 
+                            <label className="recruit-label">&nbsp;</label>
+                            <Form.Checkbox className="apply-type" label='알바몬' name='chkAlbamon' checked={chkAlbamon} onChange={this.handleCheckboxChange}/>
+                            <Form.Input className="wt-title " required={true} name="txtAlbamonUrl" placeholder='알바몬 URL' onChange={this.handleChange} defaultValue={txtAlbamonUrl} value={txtAlbamonUrl} disabled={!chkAlbamon && true} />
                         </Form.Group>
 
                         <Form.Group inline>

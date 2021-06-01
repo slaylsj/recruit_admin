@@ -31,6 +31,11 @@ class RecruitModify extends React.Component {
             chkProfileImage : false,
             chkPortfolio : false,
             chkPortfolioChoise : false,
+            chkDirect : true,
+            chkJobkorea : false,
+            chkAlbamon : false,
+            txtJobkoreaUrl : '',
+            txtAlbamonUrl : '',
             editorEnable : false,
             oEditors : [],
             editorID : 'ir2',
@@ -85,6 +90,11 @@ class RecruitModify extends React.Component {
                         chkProfileImage : (data.bProfileImage === "1" ? true : false),
                         chkPortfolio : (data.bPortfolio === "1" ? true : false),
                         chkPortfolioChoise : (data.bPortfolioChoise === "1" ? true : false),
+                        chkDirect : (data.bDirect === "1" ? true : false),
+                        chkJobkorea : (data.bJobkorea === "1" ? true : false),
+                        chkAlbamon : (data.bAlbamon === "1" ? true : false),
+                        txtJobkoreaUrl : data.sJobkoreaUrl,
+                        txtAlbamonUrl : data.sAlbamonUrl,
                         editorEnable : true
                     });
                 });
@@ -129,7 +139,8 @@ class RecruitModify extends React.Component {
 
         this.state.oEditors.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
 
-        const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, endDate } = this.state;
+        const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, endDate,
+            chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl } = this.state;
         let param_group = group, param_job = job;
         
         // 입력 값 체크.
@@ -146,7 +157,15 @@ class RecruitModify extends React.Component {
             }else{
                 param_group = txt_group;
             }
-        } 
+        }
+        
+        if(!validationCheck && chkJobkorea && txtJobkoreaUrl === ''){
+            validationCheck = true; msg = '잡코리아 URL을 입력 하시기 바랍니다.';
+        }
+        if(!validationCheck && chkAlbamon && txtAlbamonUrl === ''){
+            validationCheck = true; msg = '알바몬 URL을 입력 하시기 바랍니다.';
+        }
+
         if(!validationCheck && job === ''){
             validationCheck = true; msg = '직무를 선택 하시기 바랍니다.';
         }else if(!validationCheck && job === '직접입력'){
@@ -185,6 +204,11 @@ class RecruitModify extends React.Component {
                 bProfileImage : chkProfileImage,
                 bPortfolio : chkPortfolio,
                 bPortfolioChoise : chkPortfolioChoise,
+                bDirect : chkDirect,
+                bJobkorea : chkJobkorea, 
+                bAlbamon : chkAlbamon,
+                sJobkoreaUrl : chkJobkorea ? txtJobkoreaUrl : '',
+                sAlbamonUrl : chkAlbamon ? txtAlbamonUrl : '',
                 dtEnd : endDate,
                 sLoginID : localStorage.getItem("userID")
             }
@@ -233,7 +257,8 @@ class RecruitModify extends React.Component {
     }
 
     render() {
-        const { company,  group, txt_group, job, txt_job, title, contents, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, recruitType, endDate, editorEnable, alertModal, oEditors, previewModal, editorID } = this.state
+        const { company,  group, txt_group, job, txt_job, title, contents, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl,
+                recruitType, endDate, editorEnable, alertModal, oEditors, previewModal, editorID } = this.state
         const { groupList, jobList } = this.props.recruitStore;
         const previewData = { title: title,
             recruitType : recruitType,
@@ -317,6 +342,23 @@ class RecruitModify extends React.Component {
                             <label className="recruit-label-2">직무</label>
                             <Form.Select className="select-type" required={true} fluid options={jobList} placeholder='선택' name="job" value={job} defaultValue={job} onChange={this.handleChange}/>
                             { job === '직접입력' ? <Form.Input className="wt-group" required={true} name="txt_job" placeholder='직무명' onChange={this.handleChange} defaultValue={txt_job} value={txt_job} /> : null }
+                        </Form.Group>
+                        
+                        <Form.Group inline className="apply-div">
+                            <label className="recruit-label">지원유형</label>
+                            <Form.Checkbox className="apply-type" label='본사지원' name='chkDirect' checked={chkDirect} onChange={this.handleCheckboxChange}/>
+                        </Form.Group>
+
+                        <Form.Group inline className="apply-div">
+                            <label className="recruit-label">&nbsp;</label>
+                            <Form.Checkbox className="apply-type" label='잡코리아' name='chkJobkorea' checked={chkJobkorea} onChange={this.handleCheckboxChange}/>
+                            <Form.Input className="wt-title " required={true} name="txtJobkoreaUrl" placeholder='잡코리아 URL' onChange={this.handleChange} defaultValue={txtJobkoreaUrl} value={txtJobkoreaUrl} disabled={!chkJobkorea && true}/>
+                        </Form.Group>
+                        
+                        <Form.Group inline> 
+                            <label className="recruit-label">&nbsp;</label>
+                            <Form.Checkbox className="apply-type" label='알바몬' name='chkAlbamon' checked={chkAlbamon} onChange={this.handleCheckboxChange}/>
+                            <Form.Input className="wt-title " required={true} name="txtAlbamonUrl" placeholder='알바몬 URL' onChange={this.handleChange} defaultValue={txtAlbamonUrl} value={txtAlbamonUrl} disabled={!chkAlbamon && true} />
                         </Form.Group>
 
                         <Form.Group inline>

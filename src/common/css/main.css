@@ -734,3 +734,10 @@
     color: rgba(255, 255, 255, 0.4);
     opacity: 1;
   }
+
+  .apply-div {
+    margin-bottom: 0.2em !important;
+  }
+  .apply-type {
+    width: 100px;
+  }
