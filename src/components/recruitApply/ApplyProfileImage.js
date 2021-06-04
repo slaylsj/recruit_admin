@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Image, Modal, Item } from 'semantic-ui-react'
+import img_noprofile from '../../common/image/img_noprofile.png';
 
 const ApplyProfileImage = (props) => {
     const { data, handleFileDownload } = props;
-    const { open, profileImageUrl, resumeUrl, portfolioUrl, sName, nSexType, sBirthDayYear, sMemo} = data;
+    const { open, profileImageUrl, resumeUrl, portfolioUrl, sName, nSexType, sBirthDayYear, sMemo, sTitle, sPartList, sSubmitPartList} = data;
      
     const { handleProfileModalClose} = props;
     const getSexType = (type) => {
@@ -19,10 +20,19 @@ const ApplyProfileImage = (props) => {
                     { resumeUrl !== ''? <div className="resume active" onClick={()=>handleFileDownload(resumeUrl)}>이력서</div> : null }
                 </div>
             </Modal.Header>
+            <Modal.Header>
+                <div>
+                    <h4 style={{ 'marginBottom' : '5px'}}>{sTitle}</h4>
+                    <h5 style={{ 'marginTop' : '0px'}}>
+                        [모집분야] {sPartList}<br/>
+                        [지원분야] {sSubmitPartList}
+                    </h5>
+                </div>
+            </Modal.Header>
             <Modal.Content>
                 <Item.Group>
                     <Item>
-                        <Item.Image size='medium' src={`/${profileImageUrl}`} />
+                        {profileImageUrl !== '' ? <Item.Image size='medium' src={`/${profileImageUrl}`} /> : <Item.Image size='medium' src={img_noprofile} /> }
                         <Item.Content>
                             <Item.Header>{sName} - {getSexType(nSexType)} {sBirthDayYear}{sBirthDayYear.length > 0? '년' : ''} </Item.Header>
                             <Item.Description style={{ 'height':'475px', 'overflowY' : 'auto'}}>

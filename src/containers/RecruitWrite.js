@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Form, Button } from 'semantic-ui-react';
+import { Header, Form, Button, List } from 'semantic-ui-react';
 // import { DateInput } from 'semantic-ui-calendar-react';
 import DatePicker from "react-datepicker";
 // import DraftEditor from '../components/common/DraftEditor';
@@ -37,6 +37,7 @@ class RecruitWrite extends React.Component {
             chkAlbamon : false,
             txtJobkoreaUrl : '',
             txtAlbamonUrl : '',
+            recruitPartList : [""],
             oEditors : [],
             editorID : 'ir1',
             alertModal : {
@@ -90,11 +91,31 @@ class RecruitWrite extends React.Component {
         this.setState({...this.state, endDate: timezoneDate});
     }
 
+    handleRecruitPartAdd = () => {
+        const { recruitPartList } = this.state;
+        this.setState({ ...this.state, recruitPartList : recruitPartList.concat('')});
+    }
+
+    handleRecruitPartDel = (tIdx) => {
+        const { recruitPartList } = this.state;
+        if(recruitPartList.length === 1) return false;
+        this.setState({ ...this.state, recruitPartList : recruitPartList.filter((val, idx) => idx !== tIdx)});
+    }
+
+    handleChangeRecruitPart = (tIdx, tVal) => {
+        const { recruitPartList } = this.state;
+        this.setState({ ...this.state, recruitPartList : recruitPartList.map((val, idx) => 
+            {
+                return (idx === tIdx ? tVal.replace(/,/g,'.') : val)
+            })
+        });
+    }
+
     handleSave = (e) => {
         e.preventDefault();
 
         const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, endDate,
-            chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl } = this.state;
+            chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl, recruitPartList } = this.state;
         let param_group = group, param_job = job;
 
         // 입력 값 체크.
@@ -165,6 +186,7 @@ class RecruitWrite extends React.Component {
                 bAlbamon : chkAlbamon,
                 sJobkoreaUrl : chkJobkorea ? txtJobkoreaUrl : '',
                 sAlbamonUrl : chkAlbamon ? txtAlbamonUrl : '',
+                sRecruitPartList : recruitPartList.join(','),
                 dtEnd : endDate,
                 sLoginID : localStorage.getItem("userID")
             }
@@ -214,7 +236,7 @@ class RecruitWrite extends React.Component {
 
     render() {
         const { company, group, txt_group, job, txt_job, title, contents, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl, 
-                recruitType, endDate, alertModal, oEditors, previewModal, editorID } = this.state
+                recruitType, endDate, alertModal, oEditors, previewModal, editorID, recruitPartList } = this.state
         const { groupList, jobList } = this.props.recruitStore;
 
         const previewData = { title: title,
@@ -314,6 +336,21 @@ class RecruitWrite extends React.Component {
                             <label className="recruit-label">&nbsp;</label>
                             <Form.Checkbox className="apply-type" label='알바몬' name='chkAlbamon' checked={chkAlbamon} onChange={this.handleCheckboxChange}/>
                             <Form.Input className="wt-title " required={true} name="txtAlbamonUrl" placeholder='알바몬 URL' onChange={this.handleChange} defaultValue={txtAlbamonUrl} value={txtAlbamonUrl} disabled={!chkAlbamon && true} />
+                        </Form.Group>
+
+                        <Form.Group className="recruit_part">
+                            <label className="recruit-label">모집분야</label>
+                            <ul className="recruit_ul">
+                                { recruitPartList.map((val, idx) => 
+                                    <li>
+                                        <div>
+                                            <input type="text" value={val} onChange={(e) => this.handleChangeRecruitPart(idx, e.target.value)}></input> <Button className="btn_recruit_add" onClick={() => this.handleRecruitPartDel(idx)}>-</Button>
+                                            { recruitPartList.length-1 === idx ? <Button className="btn_recruit_add" onClick={this.handleRecruitPartAdd} >+</Button> : null}
+                                        </div>
+                                    </li>
+                                    )
+                                }
+                            </ul>
                         </Form.Group>
 
                         <Form.Group inline>

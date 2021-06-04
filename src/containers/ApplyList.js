@@ -29,7 +29,10 @@ class ApplyList extends React.Component {
                 sMemo : "",
                 profileImageUrl : "" ,
                 resumeUrl : "" , 
-                portfolioUrl : "" 
+                portfolioUrl : "",
+                sTitle : "",
+                sPartList : "",
+                sSubmitPartList : ""
             },
             downloadModal : {
                 open : false,
@@ -153,7 +156,10 @@ class ApplyList extends React.Component {
             sMemo : selectData.sMemo,
             profileImageUrl : selectData.sProfileImageUrl,
             resumeUrl : selectData.sResumeUrl , 
-            portfolioUrl : selectData.sPortfolioUrl }
+            portfolioUrl : selectData.sPortfolioUrl,
+            sTitle : selectData.sTitle,
+            sPartList : selectData.sPartList,
+            sSubmitPartList : selectData.sSubmitPartList }
         });
     
     }
@@ -255,8 +261,9 @@ class ApplyList extends React.Component {
                                 <Table.HeaderCell style={{ width:"60px", textAlign:"center" }} >번호</Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"120px", textAlign:"center" }} >구분</Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"400px", textAlign:"center" }} >모집 공고</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"350px", textAlign:"center" }} >지원자</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"250px", textAlign:"center" }} >연락처</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"300px", textAlign:"center" }} >모집분야 / 지원분야</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"250px", textAlign:"center" }} >지원자</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >연락처</Table.HeaderCell>
                                 {/* <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >출생년도</Table.HeaderCell> */}
                                 <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >이력서 / 포폴</Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >지원일자</Table.HeaderCell>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, Checkbox, Header, Image } from 'semantic-ui-react';
+import img_noprofile from '../../common/image/img_noprofile.png';
 
 const ApplyItem = (props) => {
     const { idx, data, listCheckValue, handleClickCheckBox, handleProfileModalOpen } = props;
@@ -24,10 +25,11 @@ const ApplyItem = (props) => {
                 <Table.Cell textAlign="center">{idx}</Table.Cell>
                 <Table.Cell textAlign="center">{companyNm(data.sCompany)}</Table.Cell>
                 <Table.Cell >{data.sTitle}</Table.Cell>
+                <Table.Cell >[모집분야] {data.sPartList}<br/>[지원분야] {data.sSubmitPartList}</Table.Cell>
                 {/* <Table.Cell textAlign="center">{data.sName} </Table.Cell> */}
                 <Table.Cell className="cursor-pointer" textAlign="center" onClick={() => handleProfileModalOpen(data.nSubmitID)}>
                 <Header as='h4' image>
-                    {data.sProfileImageUrl !== '' ? <Image src={`/${data.sProfileImageUrl}`} rounded size='mini' /> : null}
+                    {data.sProfileImageUrl !== '' ? <Image src={`/${data.sProfileImageUrl}`} rounded size='mini' /> : <Image src={img_noprofile} rounded size='mini' />}
                     <Header.Content>
                         {data.sName} 
                         <Header.Subheader>{data.sBirthDayYear}{data.sBirthDayYear.length > 0? '년' : ''} {getSexType(data.nSexType)}</Header.Subheader>
