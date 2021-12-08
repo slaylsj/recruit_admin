@@ -82,4 +82,39 @@ export default class ApplyStore {
             this.isFetching = false
         }
     }
+
+    @action
+    updateRecruitState = (params, callback) => {
+        this.isFetching = true
+        this.error = null
+        try{
+            let axiosConfig = {
+                headers : {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    'Accept': "application/json; charset=UTF-8"
+                }   
+            }
+            let data = { 
+                ws: 'fprocess',
+                query: 'GTZZHLJQAVC1NBXYRECW',
+                params: params
+            } // web_b_a_update_banaple_recruit_submit
+
+            data = JSON.stringify(data);
+            Axios.post("/query", data, axiosConfig, (result) => {
+                // console.log("RecruitStore deleteRecruit ", result.data);
+                callback( result.data );
+            }, (err) => {
+                const errMsg = "처리중에 문제가 발생하였습니다. ["+ err.message +"]";
+                callback( { return : 1, sError : errMsg});
+            });
+            this.isFetching = false
+            
+        }catch(e){
+            //this.showWarning();
+            console.log('[ERROR]ApplyStore.deleteRecruitApply', e);
+            this.error = e
+            this.isFetching = false
+        }
+    }
 }

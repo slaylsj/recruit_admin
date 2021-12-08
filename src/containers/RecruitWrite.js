@@ -38,6 +38,7 @@ class RecruitWrite extends React.Component {
             txtJobkoreaUrl : '',
             txtAlbamonUrl : '',
             recruitPartList : [""],
+            chkBannerView : false,
             oEditors : [],
             editorID : 'ir1',
             alertModal : {
@@ -115,7 +116,7 @@ class RecruitWrite extends React.Component {
         e.preventDefault();
 
         const { recruitID, company, group, txt_group, job, txt_job, recruitType, title, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, endDate,
-            chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl, recruitPartList } = this.state;
+            chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl, recruitPartList, chkBannerView } = this.state;
         let param_group = group, param_job = job;
 
         // 입력 값 체크.
@@ -188,6 +189,7 @@ class RecruitWrite extends React.Component {
                 sAlbamonUrl : chkAlbamon ? txtAlbamonUrl : '',
                 sRecruitPartList : recruitPartList.join(','),
                 dtEnd : endDate,
+                bBannerView : chkBannerView,
                 sLoginID : localStorage.getItem("userID")
             }
     
@@ -236,7 +238,7 @@ class RecruitWrite extends React.Component {
 
     render() {
         const { company, group, txt_group, job, txt_job, title, contents, chkResume, chkProfileImage, chkPortfolio, chkPortfolioChoise, chkDirect, chkJobkorea, chkAlbamon, txtJobkoreaUrl, txtAlbamonUrl, 
-                recruitType, endDate, alertModal, oEditors, previewModal, editorID, recruitPartList } = this.state
+                recruitType, endDate, alertModal, oEditors, previewModal, editorID, recruitPartList, chkBannerView } = this.state
         const { groupList, jobList } = this.props.recruitStore;
 
         const previewData = { title: title,
@@ -277,6 +279,11 @@ class RecruitWrite extends React.Component {
                                 checked={company === 'banapresso'}
                                 onChange={this.handleChange}
                             />
+                        </Form.Group>
+
+                        <Form.Group inline>
+                            <label className="recruit-label">배너 노출</label>
+                            <Form.Checkbox className="banner-view" label='* 체크 시 홈페이지 메인 화면에 배너로 노출 됩니다.' name='chkBannerView' checked={chkBannerView} onChange={this.handleCheckboxChange}/>
                         </Form.Group>
 
                         <Form.Group inline>

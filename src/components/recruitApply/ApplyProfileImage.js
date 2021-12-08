@@ -3,8 +3,8 @@ import { Button, Image, Modal, Item } from 'semantic-ui-react'
 import img_noprofile from '../../common/image/img_noprofile.png';
 
 const ApplyProfileImage = (props) => {
-    const { data, handleFileDownload } = props;
-    const { open, profileImageUrl, resumeUrl, portfolioUrl, sName, nSexType, sBirthDayYear, sMemo, sTitle, sPartList, sSubmitPartList} = data;
+    const { data, handleFileDownload, handleRecruitComplete } = props;
+    const { nSubmitID, open, profileImageUrl, resumeUrl, portfolioUrl, sName, nSexType, sBirthDayYear, sMemo, sTitle, sPartList, sSubmitPartList, bComplete} = data;
      
     const { handleProfileModalClose} = props;
     const getSexType = (type) => {
@@ -43,6 +43,7 @@ const ApplyProfileImage = (props) => {
                 </Item.Group>
             </Modal.Content>
             <Modal.Actions>
+                { bComplete !== "1" && <Button color='green' onClick={() => handleRecruitComplete(nSubmitID)}>완료</Button> }
                 <Button color='grey' onClick={handleProfileModalClose}>닫기</Button>
             </Modal.Actions>
         </Modal>

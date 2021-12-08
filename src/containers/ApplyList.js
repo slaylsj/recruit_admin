@@ -19,9 +19,11 @@ class ApplyList extends React.Component {
                 searchText : "",
             },
             pageInfo : {
-                pageRow : 10
+                pageRow : 10,
+                activePage : 1
             },
             profileImageModal : {
+                nSubmitID : 0,
                 open : false,
                 sName : "", 
                 nSexType : -1, 
@@ -32,7 +34,8 @@ class ApplyList extends React.Component {
                 portfolioUrl : "",
                 sTitle : "",
                 sPartList : "",
-                sSubmitPartList : ""
+                sSubmitPartList : "",
+                bComplete : ""
             },
             downloadModal : {
                 open : false,
@@ -50,6 +53,7 @@ class ApplyList extends React.Component {
         }
         this.getApplyList = (params) => this.props.applyStore.getApplyList(params);
         this.deleteRecruitApply = (params, fCallback) => this.props.applyStore.deleteRecruitApply(params, fCallback);
+        this.updateRecruitState = (params, fCallback) => this.props.applyStore.updateRecruitState(params, fCallback);
     }
 
     componentDidMount(){
@@ -148,7 +152,9 @@ class ApplyList extends React.Component {
         // 선택된 데이터 정보 추출.
         const targetQnaIndex = applyList.map( data => { return data.nSubmitID }).indexOf(submitID);
         let selectData = Object.assign({}, applyList[targetQnaIndex]);
+        this.handleRecruitRead(selectData.nSubmitID);
         this.setState({ ...this.state, profileImageModal : { 
+            nSubmitID : selectData.nSubmitID,
             open: true, 
             sName : selectData.sName, 
             nSexType : selectData.nSexType, 
@@ -159,14 +165,15 @@ class ApplyList extends React.Component {
             portfolioUrl : selectData.sPortfolioUrl,
             sTitle : selectData.sTitle,
             sPartList : selectData.sPartList,
-            sSubmitPartList : selectData.sSubmitPartList }
+            sSubmitPartList : selectData.sSubmitPartList,
+            bComplete : selectData.bComplete }
         });
-    
     }
 
     // 프로필사진 모달 닫기
     handleProfileModalClose = () => {
         this.setState({ ...this.state, profileImageModal : { 
+            nSubmitID : 0,
             open: false, 
             sName : '', 
             nSexType : -1, 
@@ -174,7 +181,8 @@ class ApplyList extends React.Component {
             sMemo : '',
             profileImageUrl : '',
             resumeUrl : "" , 
-            portfolioUrl : "" }
+            portfolioUrl : "", 
+            bComplete : ""}
         });
     }
 
@@ -223,6 +231,44 @@ class ApplyList extends React.Component {
     // 페이지 이벤트
     handlePaginationChange = (activePage) => {
         this.handleSearch(activePage);
+        this.setState({ ...this.state, 
+            pageInfo : { ...this.state.pageInfo,  activePage : activePage }
+        });
+    }
+
+    // 열람, 완료 처리.
+    handleRecruitRead= (nSubmitID) => {
+        const { activePage } = this.state.pageInfo;
+        const params = {
+            nFCode: "@nFCode",
+            nSubmitID : nSubmitID,
+            sGubun : 'READ'
+        }
+        this.updateRecruitState(params, (data) => {
+            if(data.return === 0){
+                this.handleSearch(activePage);
+            }
+        });
+    }
+
+    // 완료 처리.
+    handleRecruitComplete= (nSubmitID) => {
+        const { activePage } = this.state.pageInfo;
+        const params = {
+            nFCode: "@nFCode",
+            nSubmitID : nSubmitID,
+            sGubun : 'COMPLETE'
+        }
+        this.updateRecruitState(params, (data) => {
+            if(data.return === 0){
+                this.handleProfileModalClose();
+                this.handleSearch(activePage);
+            }else{
+                this.setState({ ...this.state, 
+                    alertModal : { open : true, message : "처리시 문제가 발생하였습니다." }
+                });
+            }
+        });
     }
 
     render(){
@@ -265,8 +311,10 @@ class ApplyList extends React.Component {
                                 <Table.HeaderCell style={{ width:"250px", textAlign:"center" }} >지원자</Table.HeaderCell>
                                 <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >연락처</Table.HeaderCell>
                                 {/* <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >출생년도</Table.HeaderCell> */}
-                                <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >이력서 / 포폴</Table.HeaderCell>
-                                <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >지원일자</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"120px", textAlign:"center" }} >이력서 / 포폴</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"100px", textAlign:"center" }} >지원일자</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"100px", textAlign:"center" }} >열람</Table.HeaderCell>
+                                <Table.HeaderCell style={{ width:"100px", textAlign:"center" }} >완료</Table.HeaderCell>
                                 <Table.HeaderCell style={{ textAlign:"center" }} >메모</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
@@ -281,7 +329,7 @@ class ApplyList extends React.Component {
                     </div> 
                 </div>
 
-                <ApplyProfileImage data={profileImageModal} handleProfileModalClose={this.handleProfileModalClose} handleFileDownload={this.handleFileView} />
+                <ApplyProfileImage data={profileImageModal} handleProfileModalClose={this.handleProfileModalClose} handleFileDownload={this.handleFileView} handleRecruitComplete={this.handleRecruitComplete} />
                 <ApplyDownload data={downloadModal} handleDownModalClose={this.handleDownModalClose} handleFileDownload={this.handleFileDownload} />
                 <Confirm open={confirmModal.open} size="tiny" content={confirmModal.message} cancelButton="취소" confirmButton="확인" onCancel={this.handleDeleteCancel} onConfirm={this.handleDeleteConfirm} />
                 <AlertModal open={alertModal.open} message={alertModal.message}  size="mini" closeModal={this.handleCloseAlertModal} />

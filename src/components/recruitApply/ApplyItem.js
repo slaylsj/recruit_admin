@@ -40,6 +40,8 @@ const ApplyItem = (props) => {
                 {/* <Table.Cell textAlign="center">{data.sBirthDayYear}{data.sBirthDayYear.length > 0? '년' : ''}</Table.Cell> */}
                 <Table.Cell textAlign="center" className="list-col">{data.sResumeUrl !== '' ? <span className="on">O</span> : <span className="off">X</span>} / {data.sPortfolioUrl !== '' ? <span className="on1">O</span> : <span className="off">X</span>}</Table.Cell>
                 <Table.Cell textAlign="center">{data.dtSubmitDate}</Table.Cell>
+                <Table.Cell textAlign="center" className="list-col">{data.bRead === "1" ? <span className="on">O</span> : ''}</Table.Cell>
+                <Table.Cell textAlign="center" className="list-col">{data.bComplete === "1" ? <span className="on">O</span> : ''}</Table.Cell>
                 <Table.Cell className="cursor-pointer white-space-pre" onClick={() => handleProfileModalOpen(data.nSubmitID)}>{data.sMemo}</Table.Cell>
             </Table.Row>
         )

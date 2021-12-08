@@ -26,6 +26,7 @@ const RecruitItem = (props) => {
             <Table.Cell textAlign="center">{companyNm(data.sCompany)}</Table.Cell>
             <Table.Cell textAlign="center">{data.nRecruitType === 0 ? "정시" : "상시"}</Table.Cell>
             <Table.Cell className="rec-title" onClick={() => handleClickDetail(data.nRecruitID)}><b>{data.sTitle}</b><br/> ~ {data.dtEndView}</Table.Cell>
+            <Table.Cell textAlign="center" className="list-col">{data.bBannerView === "1" ? <span className="on">O</span> : ''}</Table.Cell>
             <Table.Cell textAlign="center">{finishDay(data.nFinishDay, data.nRecruitType)}</Table.Cell>
             <Table.Cell className="center"><Button color='blue' onClick={()=> handleCopyUrl(data.nRecruitID, data.sCompany)}>복사</Button></Table.Cell>
         </Table.Row>

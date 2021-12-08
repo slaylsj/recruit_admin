@@ -200,6 +200,7 @@ class RecruitMgmt extends React.Component {
                                         <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >구분</Table.HeaderCell>
                                         <Table.HeaderCell style={{ width:"100px", textAlign:"center" }} >채용구분 </Table.HeaderCell>
                                         <Table.HeaderCell style={{ textAlign:"center" }} >모집 공고</Table.HeaderCell>
+                                        <Table.HeaderCell style={{ width:"150px", textAlign:"center" }} >배너노출</Table.HeaderCell>
                                         <Table.HeaderCell style={{ width:"200px", textAlign:"center" }} >기간</Table.HeaderCell>
                                         <Table.HeaderCell style={{ width:"100px", textAlign:"center" }} >링크 URL</Table.HeaderCell>
                                     </Table.Row>

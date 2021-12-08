@@ -741,6 +741,9 @@
   .apply-type {
     width: 100px;
   }
+  .banner-view {
+    width: 500px;
+  }
 
   .recruit_ul {  margin: 0px; padding-inline-start: 15px; }
   .recruit_ul > li { display: initial;}
